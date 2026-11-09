@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B2545">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="مختبر شرحبيل">
+<meta name="description" content="مختبر العلوم الافتراضي لمتوسطة شرحبيل بن حسنة: محاكي فت، ومحاكي شرحبيل، وتجارب يوتيوب، ومبادرة STEAM.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<title>مختبر شرحبيل الافتراضي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B2545; --navy2:#13315C; --ink:#13243A; --muted:#5B6B7F;
+  --teal:#0FA3A3; --teal2:#0B8686; --green:#2E9D5B; --blue:#2B6CB0; --sky:#E8F4F8;
+  --paper:#F7F9FB; --line:#DCE4EC; --white:#fff;
+  --g1:#2E9D5B; --g2:#0FA3A3; --g3:#2B6CB0;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.75;font-size:16px}
+h1,h2,h3,h4{font-family:"Readex Pro","IBM Plex Sans Arabic",sans-serif;line-height:1.35;margin:0}
+a{color:var(--blue)}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(11,37,69,.92);backdrop-filter:blur(8px);color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
+nav.top .wrap{display:flex;align-items:center;gap:18px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Readex Pro";font-weight:600;font-size:17px;white-space:nowrap;color:#fff;text-decoration:none}
+.brand svg{flex:none}
+nav.top .links{display:flex;gap:4px;margin-inline-start:auto;overflow-x:auto;scrollbar-width:none}
+nav.top .links a{color:#cfe0ee;text-decoration:none;font-size:14.5px;padding:7px 12px;border-radius:8px;white-space:nowrap}
+nav.top .links a:hover,nav.top .links a.on{background:rgba(255,255,255,.1);color:#fff}
+
+/* hero */
+header.hero{position:relative;overflow:hidden;background:radial-gradient(1200px 600px at 80% -10%,#1d4e80 0%,transparent 60%),linear-gradient(180deg,#0B2545,#0a1f3a);color:#fff;min-height:560px}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;padding-top:56px;padding-bottom:70px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;flex-direction:row-reverse;gap:16px;flex-wrap:wrap-reverse}
+.moe{width:150px;height:auto;display:block}
+.about-hero .moe{width:130px;margin-bottom:18px}
+@media (max-width:640px){.hero-top{flex-direction:column;align-items:flex-start;flex-wrap:nowrap}.moe{width:120px}}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:13.5px;letter-spacing:.2px;color:#9fe3e3;border:1px solid rgba(159,227,227,.35);padding:5px 12px;border-radius:999px}
+.hero h1{font-size:clamp(36px,6.4vw,68px);font-weight:700;margin:18px 0 10px;letter-spacing:-.5px}
+.hero h1 span{color:#5fd4c8}
+.hero p.lead{font-size:clamp(16px,2vw,19px);color:#c9d8e6;max-width:640px;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{border:0;border-radius:10px;padding:12px 20px;font-size:15.5px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn.pri{background:var(--teal);color:#fff}
+.btn.pri:hover{background:var(--teal2)}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:54px;max-width:760px;border-top:1px solid rgba(255,255,255,.14)}
+.stat{padding:16px 4px 0}
+.stat b{display:block;font-family:"Readex Pro";font-size:34px;font-weight:600;color:#fff;line-height:1.1}
+.stat small{color:#9fb6cc;font-size:13.5px}
+
+/* sections */
+section{padding:80px 0;position:relative}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head .k{font-size:13.5px;color:var(--teal2);font-weight:600;letter-spacing:.3px}
+.sec-head h2{font-size:clamp(26px,3.6vw,38px);color:var(--navy);margin-top:4px}
+.sec-head p{margin:8px 0 0;color:var(--muted);max-width:640px}
+.grid-paper{background-color:#fff;background-image:linear-gradient(rgba(15,163,163,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(15,163,163,.07) 1px,transparent 1px);background-size:26px 26px}
+.hex-bg{background-color:var(--paper);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='97' viewBox='0 0 84 97'%3E%3Cpath d='M42 2 80 24v44L42 92 4 68V24z' fill='none' stroke='%230B2545' stroke-opacity='.06' stroke-width='1.2'/%3E%3C/svg%3E")}
+
+/* grade tabs */
+.grades{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.gtab{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;text-align:start;display:flex;align-items:center;gap:14px;transition:.2s}
+.gtab .num{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-family:"Readex Pro";font-weight:700;font-size:22px;color:#fff;flex:none}
+.gtab b{display:block;font-family:"Readex Pro";font-size:17px;color:var(--navy)}
+.gtab small{color:var(--muted);font-size:13px}
+.gtab.on{border-color:transparent;box-shadow:0 0 0 2px var(--gc) inset,0 10px 28px -16px rgba(11,37,69,.45)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
+.search{flex:1 1 260px;position:relative}
+.search input{width:100%;font-family:inherit;font-size:15px;border:1px solid var(--line);border-radius:10px;padding:11px 40px 11px 14px;background:#fff}
+.search svg{position:absolute;right:13px;top:50%;transform:translateY(-50%);opacity:.5}
+.chip{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:7px 14px;font-size:14px}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.unit{margin-bottom:34px}
+.unit-h{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:16px}
+.unit-h .tag{font-size:13px;font-weight:600;color:#fff;background:var(--gc);padding:2px 10px;border-radius:6px}
+.unit-h h3{font-size:21px;color:var(--navy)}
+.chap{margin:0 0 18px}
+.chap-h{font-size:15px;font-weight:600;color:var(--muted);margin:0 0 10px;display:flex;gap:8px;align-items:center}
+.chap-h i{font-style:normal;width:24px;height:24px;border-radius:7px;display:inline-grid;place-items:center;background:var(--sky);color:var(--navy);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;text-align:start;display:flex;flex-direction:column;gap:8px;transition:.18s;position:relative}
+.card:hover{transform:translateY(-2px);box-shadow:0 14px 30px -18px rgba(11,37,69,.5);border-color:#c6d4e1}
+.card .meta{font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between}
+.card h4{font-size:16.5px;color:var(--navy);font-weight:600}
+.card .ex{font-size:13.5px;color:var(--muted);line-height:1.6}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.bdg{font-size:12px;padding:2px 9px;border-radius:999px;background:var(--sky);color:var(--navy2);font-weight:500}
+.bdg.ph{background:#e6f5ec;color:#1f6f40}
+.bdg.in{background:#e7f0fb;color:#1f4f86}
+.bdg.st{background:#fdf1e3;color:#8a4b0f}
+.empty{padding:30px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:var(--r)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;display:none;background:rgba(8,22,40,.55);backdrop-filter:blur(3px);padding:20px;overflow:auto}
+.modal.open{display:block}
+.sheet{background:#fff;max-width:780px;margin:30px auto;border-radius:18px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(0,0,0,.45)}
+.sheet-h{padding:24px 26px 18px 64px;color:#fff;background:linear-gradient(135deg,var(--navy),var(--navy2));position:relative}
+.sheet-h small{color:#9fe3e3}
+.sheet-h h3{font-size:24px;margin-top:4px}
+.x{position:absolute;left:16px;top:16px;width:36px;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font-size:20px;line-height:1}
+.sheet-b{padding:22px 26px 28px}
+.blk{margin-bottom:24px}
+.blk h5{font-family:"Readex Pro";font-size:15px;color:var(--teal2);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.blk h5::before{content:"";width:16px;height:2px;background:var(--teal)}
+.sim{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.sim .ico{width:40px;height:40px;border-radius:10px;background:#e6f5ec;display:grid;place-items:center;flex:none}
+.sim .nm{flex:1}
+.sim .nm b{display:block;font-size:15px;color:var(--navy)}
+.sim .nm small{color:var(--muted);font-size:12.5px}
+.sim{align-items:flex-start}
+.sim .use{margin:6px 0 0;font-size:14px;color:var(--ink);line-height:1.65}
+.sim .acts{display:flex;flex-direction:column;gap:6px;align-items:stretch}
+.sim.ext .ico{background:#e7f0fb}
+.sim.ext a.run{background:var(--blue)}
+.sim a{font-size:13.5px;text-decoration:none;border-radius:8px;padding:6px 11px;white-space:nowrap}
+.sim a.run{background:var(--green);color:#fff}
+.sim a.inf{color:var(--muted)}
+.mats{display:flex;flex-wrap:wrap;gap:6px}
+.mats span{font-size:13.5px;background:var(--paper);border:1px solid var(--line);padding:3px 10px;border-radius:8px}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:4px 40px 10px 0}
+ol.steps li::before{content:counter(s);position:absolute;right:0;top:4px;width:28px;height:28px;border-radius:50%;background:var(--sky);color:var(--navy);font-weight:600;display:grid;place-items:center;font-size:14px}
+.q{background:#f2f8fb;border-right:3px solid var(--teal);padding:10px 14px;border-radius:8px}
+.warn{background:#fff7ec;border-right:3px solid #e39a3b;padding:10px 14px;border-radius:8px;margin-top:10px;font-size:14.5px}
+.row-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn.line{border:1px solid var(--line);background:#fff;color:var(--navy)}
+.btn.line:hover{border-color:var(--navy)}
+.note{font-size:13px;color:var(--muted)}
+
+/* built-in sims */
+.dark{background:linear-gradient(180deg,#0B2545,#0d2b50);color:#e6eef6}
+.dark .sec-head h2{color:#fff}
+.dark .sec-head p{color:#a9bdd1}
+.dark .sec-head .k{color:#5fd4c8}
+.simtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.simtabs button{background:rgba(255,255,255,.06);color:#cfe0ee;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 14px;font-size:14.5px}
+.simtabs button small{display:block;font-size:11.5px;color:#7fa0bd}
+.simtabs button.on{background:#fff;color:var(--navy);border-color:#fff}
+.simtabs button.on small{color:var(--teal2)}
+.stage{background:#fff;color:var(--ink);border-radius:18px;padding:22px;display:grid;grid-template-columns:1.35fr 1fr;gap:22px;min-height:420px}
+.stage .viz{background:var(--paper);border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden;min-height:330px}
+.stage canvas{width:100%;height:100%;display:block}
+.ctrl h3{font-size:21px;color:var(--navy)}
+.ctrl .sub{font-size:13px;color:var(--teal2);font-weight:600}
+.ctrl p{color:var(--muted);font-size:14.5px;margin:6px 0 14px}
+.field{margin-bottom:14px}
+.field label{display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.field label output{color:var(--teal2);font-family:"Readex Pro"}
+input[type=range]{width:100%;accent-color:var(--teal)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 11px;font-size:14px;color:var(--ink)}
+.seg button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.readout div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.readout small{display:block;color:var(--muted);font-size:12px}
+.readout b{font-family:"Readex Pro";font-size:19px;color:var(--navy)}
+.insight{margin-top:12px;background:#f2f8fb;border-right:3px solid var(--teal);border-radius:8px;padding:10px 12px;font-size:14.5px}
+select{font-family:inherit;font-size:14.5px;border:1px solid var(--line);border-radius:9px;padding:7px 10px;background:#fff;width:100%}
+.punnett{display:grid;grid-template-columns:52px 1fr 1fr;grid-template-rows:44px 1fr 1fr;gap:6px;padding:18px;height:100%}
+.punnett div{display:grid;place-items:center;border-radius:10px;font-family:"Readex Pro";font-size:20px}
+.punnett .hd{background:var(--navy);color:#fff;font-size:18px}
+.punnett .cell{background:#fff;border:1px solid var(--line);flex-direction:column;gap:2px;font-size:22px;padding:6px}
+.punnett .cell small{font-family:"IBM Plex Sans Arabic";font-size:12.5px;color:var(--muted)}
+.dot{width:30px;height:30px;border-radius:50%;margin:2px auto}
+.bars .bar{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:5px 0}
+.bars .bar i{display:block;height:12px;border-radius:6px;background:var(--teal)}
+.bars .bar span{min-width:84px}
+
+/* stem */
+.cycle{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:6px 0 16px}
+.cycle button{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 8px;text-align:center;position:relative}
+.cycle button b{display:block;font-family:"Readex Pro";font-size:15.5px;color:var(--navy)}
+.cycle button small{color:var(--muted);font-size:12px}
+.cycle button.on{background:var(--navy);border-color:var(--navy)}
+.cycle button.on b{color:#fff}.cycle button.on small{color:#9fe3e3}
+.cycle-detail{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:34px;font-size:15px}
+.stemgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px;text-align:start}
+.pcard:hover{box-shadow:0 14px 30px -18px rgba(11,37,69,.5)}
+.pcard .meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.pcard h4{font-size:18px;color:var(--navy)}
+.pcard p{margin:0;font-size:14px;color:var(--muted);line-height:1.65}
+.steam{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:auto;padding-top:8px}
+.steam span{font-family:"Readex Pro";font-weight:600;text-align:center;font-size:12px;white-space:nowrap;padding:4px 0;border-radius:7px;background:var(--paper);color:var(--navy2)}
+.smap{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.smap div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14.5px}
+.smap div b{display:block;font-family:"Readex Pro";color:var(--teal2);font-size:14px}
+.plan{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border-top:2px solid var(--navy)}
+.plan div{padding:14px 14px 0 10px;border-left:1px solid var(--line)}
+.plan div:last-child{border-left:0}
+.plan small{color:var(--teal2);font-weight:600;font-size:13px}
+.plan b{display:block;font-family:"Readex Pro";color:var(--navy);font-size:16px;margin:2px 0 4px}
+.plan p{margin:0;font-size:14px;color:var(--muted)}
+table.rub{width:100%;border-collapse:collapse;background:#fff;font-size:14px;margin-top:14px}
+table.rub th,table.rub td{border:1px solid var(--line);padding:9px 10px;text-align:start;vertical-align:top}
+table.rub th{background:var(--navy);color:#fff;font-weight:500}
+table.rub td:first-child{font-weight:600;color:var(--navy);background:var(--paper);white-space:nowrap}
+.tbl-wrap{overflow-x:auto}
+
+/* guide */
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.modes div{padding:20px 18px 0 18px;border-left:1px solid var(--line)}
+.modes div:last-child{border-left:0}
+.modes b{font-family:"Readex Pro";font-size:18px;color:var(--navy);display:block;margin-bottom:6px}
+.modes p{margin:0;color:var(--muted);font-size:14.5px}
+#about{display:none;min-height:calc(100vh - 62px)}
+body.about-view #about{display:block}
+body.about-view .main-view{display:none}
+.about-hero{background:linear-gradient(180deg,#0B2545,#0d2b50);color:#fff;padding:70px 0 56px;position:relative;overflow:hidden}
+.about-hero .k{color:#5fd4c8;font-size:13.5px;font-weight:600}
+.about-hero h2{font-size:clamp(30px,4.6vw,48px);margin:6px 0 12px}
+.about-hero p{color:#c9d8e6;max-width:680px;margin:0;font-size:17px}
+.about-body{padding:56px 0 70px}
+.lead-card{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:34px;max-width:560px}
+.mono{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;font-family:"Readex Pro";font-weight:600;font-size:20px;color:#fff;background:var(--navy);flex:none}
+.lead-card small,.tcard small{display:block;color:var(--teal2);font-weight:600;font-size:13px}
+.lead-card b{font-family:"Readex Pro";font-size:20px;color:var(--navy)}
+.team-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px}
+.team-h h3{font-size:22px;color:var(--navy)}
+.team-h span{color:var(--muted);font-size:14px}
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;align-items:center;gap:12px}
+.tcard.tall{background:var(--paper)}
+.tcard .mono{width:46px;height:46px;font-size:17px;border-radius:12px}
+.tcard b{font-family:"Readex Pro";font-size:16.5px;color:var(--navy);font-weight:600}
+.mission{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);margin-top:46px}
+.mission div{padding:18px 18px 0 18px;border-left:1px solid var(--line)}
+.mission div:last-child{border-left:0}
+.mission b{font-family:"Readex Pro";color:var(--navy);font-size:17px;display:block;margin-bottom:4px}
+.mission p{margin:0;color:var(--muted);font-size:14.5px}
+@media (max-width:640px){.mission{grid-template-columns:1fr}.mission div{border-left:0;border-bottom:1px solid var(--line);padding-bottom:14px}}
+nav.top{padding-top:env(safe-area-inset-top)}
+.tabbar{display:none}
+.install{display:none}
+.install.show{display:inline-flex}
+.ios-hint{display:none;position:fixed;inset:auto 12px calc(84px + env(safe-area-inset-bottom)) 12px;z-index:120;background:#fff;color:var(--ink);border-radius:14px;padding:14px 16px;box-shadow:0 20px 50px -10px rgba(0,0,0,.4);font-size:14.5px}
+.ios-hint.show{display:block}
+.ios-hint b{font-family:"Readex Pro";color:var(--navy)}
+.ios-hint button{position:absolute;left:10px;top:8px;border:0;background:none;font-size:20px;color:var(--muted)}
+@media (max-width:640px){
+  nav.top .links{display:none}
+  body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;color:var(--muted);text-decoration:none;padding:4px 0;border-radius:10px}
+  .tabbar a svg{width:22px;height:22px}
+  .tabbar a.on{color:var(--teal2)}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+}
+/* STEAM identity */
+:root{--S:#1F9D6B;--T:#2B6CB0;--E:#E0841E;--A:#C2417A;--M:#6B4FBB;--yt:#C4302B}
+.steam-word{display:inline-flex;gap:4px;direction:ltr;font-family:"Readex Pro";font-weight:700;letter-spacing:.5px}
+.steam-word i{font-style:normal;display:inline-grid;place-items:center;width:1.25em;height:1.25em;border-radius:.28em;color:#fff}
+.steam-word .S{background:var(--S)}.steam-word .T{background:var(--T)}.steam-word .E{background:var(--E)}.steam-word .A{background:var(--A)}.steam-word .M{background:var(--M)}
+.steam-big{font-size:34px}
+.steam-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0 34px}
+.steam-legend div{background:#fff;border:1px solid var(--line);border-top:4px solid var(--c);border-radius:12px;padding:12px 14px}
+.steam-legend b{display:block;font-family:"Readex Pro";color:var(--c);font-size:16px}
+.steam-legend small{color:var(--muted);font-size:13px;line-height:1.6;display:block;margin-top:2px}
+.steam{grid-template-columns:repeat(5,1fr)!important;direction:ltr}
+.steam span{color:#fff!important}
+.steam .S{background:var(--S)!important}.steam .T{background:var(--T)!important}.steam .E{background:var(--E)!important}.steam .A{background:var(--A)!important}.steam .M{background:var(--M)!important}
+.smap{grid-template-columns:1fr 1fr}
+.smap div{border-right:4px solid var(--c)!important}
+.smap div b{color:var(--c)!important}
+/* lesson tracks */
+.track{border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;margin-bottom:16px;position:relative}
+.track-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.track-h .tico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;flex:none;font-family:"Readex Pro";font-weight:700;font-size:13px}
+.track-h b{font-family:"Readex Pro";font-size:16.5px;color:var(--navy)}
+.track-h small{display:block;color:var(--muted);font-size:12.5px}
+.track.phet{border-top:4px solid var(--green)}.track.phet .tico{background:var(--green)}
+.track.shr{border-top:4px solid var(--teal)}.track.shr .tico{background:var(--teal)}
+.track.yt{border-top:4px solid var(--yt)}.track.yt .tico{background:var(--yt)}
+.track.exp{border-top:4px solid var(--navy)}.track.exp .tico{background:var(--navy)}
+.track.st{border-top:4px solid var(--A)}
+.ytbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ytbtns a{display:flex;flex-direction:column;gap:2px;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--ink)}
+.ytbtns a b{font-family:"Readex Pro";font-size:14.5px;color:var(--yt)}
+.ytbtns a small{color:var(--muted);font-size:12.5px;line-height:1.5}
+.ytbtns a:hover{border-color:var(--yt)}
+.goal{background:var(--sky);border-radius:10px;padding:8px 12px;font-size:14.5px;margin-bottom:12px}
+.bdg.yt{background:#fbe9e8;color:#9b2520}
+.bdg.st{background:#f9e6ef;color:#8e2457}
+.pillars{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+.pillars span{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:#d7e4f0;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:5px 12px}
+.pillars span i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;margin-top:14px;padding:0;list-style:none}
+.checklist li{position:relative;padding-right:26px;font-size:14.5px}
+.checklist li::before{content:"";position:absolute;right:0;top:6px;width:14px;height:14px;border-radius:4px;border:2px solid var(--teal)}
+@media (max-width:900px){.steam-legend{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.ytbtns,.smap,.checklist{grid-template-columns:1fr}.steam-big{font-size:28px}.sim .nm{flex:1 1 calc(100% - 56px)}.sim .acts{flex-direction:row;width:100%;padding-right:52px}.track{padding:12px}}
+footer{background:#081a31;color:#9fb6cc;padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer b{color:#fff;font-family:"Readex Pro";font-weight:500}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(30px);background:var(--navy);color:#fff;padding:10px 18px;border-radius:10px;opacity:0;transition:.25s;z-index:200;font-size:14.5px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:900px){
+  .stage{grid-template-columns:1fr}
+  .stage .viz{min-height:300px}
+  .cycle{grid-template-columns:repeat(3,1fr)}
+  .plan,.modes{grid-template-columns:1fr 1fr}
+  .plan div,.modes div{border-left:0;border-bottom:1px solid var(--line);padding-bottom:14px}
+}
+@media (max-width:640px){
+  nav.top .links a{padding:7px 9px;font-size:14px}
+  .grades{grid-template-columns:1fr}
+  .gtab{padding:12px 14px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat b{font-size:28px}
+  section{padding:56px 0}
+  .smap{grid-template-columns:1fr}
+  .plan,.modes{grid-template-columns:1fr}
+  .sheet-b{padding-left:18px;padding-right:18px}
+  .sheet-h{padding-right:18px;padding-left:60px}
+  .modal{padding:8px}
+  .sheet{margin:10px auto}
+  .sim{flex-wrap:wrap}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="#home">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M15 1.5 27 8.5v13L15 28.5 3 21.5v-13z" fill="none" stroke="#5fd4c8" stroke-width="1.6"/><path d="M12 8h6M13 8v5.5L9 21.5h12L17 13.5V8" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><circle cx="14" cy="18" r="1.3" fill="#5fd4c8"/><circle cx="16.8" cy="19.6" r=".9" fill="#5fd4c8"/></svg>
+      <span class="bt">مختبر شرحبيل الافتراضي</span>
+    </a>
+    <div class="links">
+      <a href="#lab">مختبر الدروس</a>
+      <a href="#sims">محاكيات شرحبيل</a>
+      <a href="#stem">مبادرة STEAM</a>
+      <a href="#guide">دليل المعلم</a>
+      <a href="#about">من نحن</a>
+    </div>
+  </div>
+</nav>
+
+<div class="main-view">
+<header class="hero" id="home">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-top"><img class="moe" src="data:image/png;base64,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" alt="شعار وزارة التعليم">
+    <span class="eyebrow">متوسطة شرحبيل بن حسنة · العلوم · الفصل الدراسي الأول</span></div>
+    <h1>مختبر <span>شرحبيل</span> الافتراضي</h1>
+    <div class="pillars"><span><i style="background:#2E9D5B"></i>محاكي فت</span><span><i style="background:#0FA3A3"></i>محاكي شرحبيل</span><span><i style="background:#E0574F"></i>تجارب يوتيوب</span><span><i style="background:#C2417A"></i>مبادرة STEAM</span></div>
+    <p class="lead">كل درس من كتب العلوم للصفوف الأول والثاني والثالث المتوسط، ومعه محاكي فت المطابق لمحتواه، ومحاكيات صممناها له، ومقاطع يوتيوب موجّهة من قناة عين الرسمية، وتجربة بمواد بسيطة، وتحدي STEAM يبني فيه الطالب ويبدع.</p>
+    <div class="cta">
+      <a class="btn pri" href="#lab">ادخل المختبر</a>
+      <a class="btn ghost" href="#stem">مبادرة مختبر ستيم STEAM</a>
+      <a class="btn ghost" href="#about">من نحن</a>
+      <button class="btn ghost install" id="installBtn">ثبّت التطبيق على جوالك</button>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<!-- LAB -->
+<section id="lab" class="grid-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="k">مختبر الدروس</div>
+        <h2>اختر الصف، ثم افتح الدرس</h2>
+        <p>الدروس مرتبة كما في كتاب الطالب مع رقم الصفحة. افتح أي بطاقة لترى المحاكاة والتجربة والمشروع المرتبط بها.</p>
+      </div>
+    </div>
+    <div class="grades" id="grades"></div>
+    <div class="toolbar">
+      <div class="search">
+        <input id="q" type="search" placeholder="ابحث عن درس أو تجربة… مثل: الكثافة، DNA، البراكين">
+        <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="#13243A" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="#13243A" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <button class="chip on" data-f="all">الكل</button>
+      <button class="chip" data-f="ph">فيه محاكي فت أو مصدر تفاعلي</button>
+      <button class="chip" data-f="in">فيه محاكي شرحبيل</button>
+      <button class="chip" data-f="st">فيه تحدي STEAM</button>
+    </div>
+    <div id="units"></div>
+  </div>
+</section>
+
+<!-- BUILT-IN SIMS -->
+<section id="sims" class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="k">محاكيات شرحبيل</div>
+        <h2>محاكيات صُممت لدروس ليس لها محاكاة في فت</h2>
+        <p>تعمل داخل الصفحة مباشرة، على الجوال والسبورة الذكية.</p>
+      </div>
+    </div>
+    <div class="simtabs" id="simtabs"></div>
+    <div id="simstage"></div>
+  </div>
+</section>
+
+<!-- STEAM -->
+<section id="stem" class="hex-bg">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="k">مبادرة مختبر ستيم</div>
+        <h2 style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span class="steam-word steam-big"><i class="S">S</i><i class="T">T</i><i class="E">E</i><i class="A">A</i><i class="M">M</i></span> نبني من أشياء بسيطة… ونبدع</h2>
+        <p>تحديات قصيرة يطبقها الزميل في صفه بمواد معاد تدويرها، وكل تحدٍّ مرتبط بدرس من الكتاب ويجمع العلوم والتقنية والهندسة والفنون والرياضيات.</p>
+      </div>
+    </div>
+    <div class="steam-legend">
+      <div style="--c:var(--S)"><b>S · العلوم</b><small>المفهوم العلمي الذي يفسّر عمل التصميم</small></div>
+      <div style="--c:var(--T)"><b>T · التقنية</b><small>الأدوات والأجهزة وتطبيقات القياس والتوثيق</small></div>
+      <div style="--c:var(--E)"><b>E · الهندسة</b><small>التصميم والبناء والاختبار والتحسين</small></div>
+      <div style="--c:var(--A)"><b>A · الفنون</b><small>الجمال والتصميم البصري والعرض والتوعية</small></div>
+      <div style="--c:var(--M)"><b>M · الرياضيات</b><small>القياس والحساب والجداول والرسوم البيانية</small></div>
+    </div>
+    <h3 style="font-size:18px;color:var(--navy);margin-bottom:10px">دورة التصميم الهندسي</h3>
+    <div class="cycle" id="cycle"></div>
+    <div class="cycle-detail" id="cycleDetail"></div>
+
+    <div class="sec-head" style="margin-bottom:16px">
+      <h3 style="font-size:22px;color:var(--navy)">تحديات المبادرة</h3>
+      <div class="seg" id="stemFilter">
+        <button class="on" data-g="0">الكل</button><button data-g="1">الأول</button><button data-g="2">الثاني</button><button data-g="3">الثالث</button>
+      </div>
+    </div>
+    <div class="stemgrid" id="stemgrid"></div>
+
+    <h3 style="font-size:22px;color:var(--navy);margin-top:56px">خطة تنفيذ المبادرة في الفصل الدراسي</h3>
+    <div class="plan">
+      <div><small>الأسبوعان ١–٢</small><b>الإطلاق والتجهيز</b><p>تجهيز ركن ستيم وصندوق المواد المعاد تدويرها، وتعريف الطلاب بدورة التصميم الهندسي.</p></div>
+      <div><small>الأسابيع ٣–٦</small><b>تحديات صفية قصيرة</b><p>تحدٍّ لكل صف كل أسبوعين داخل الحصة، بفرق من ٤ طلاب ودفتر تصميم.</p></div>
+      <div><small>الأسابيع ٧–١٠</small><b>مشروع الفريق</b><p>كل فريق يختار تحديًا ويمر بالدورة كاملة: نموذج أول، اختبار، ثم تحسين موثّق بالأرقام.</p></div>
+      <div><small>الأسبوعان ١١–١٢</small><b>معرض مختبر شرحبيل</b><p>عرض التصاميم أمام الطلاب وأولياء الأمور، وتكريم أفضل تصميم وأفضل تحسين في كل صف.</p></div>
+    </div>
+
+    <h3 style="font-size:22px;color:var(--navy);margin-top:48px">سلّم تقدير تحدي STEAM</h3>
+    <div class="tbl-wrap">
+    <table class="rub">
+      <thead><tr><th>المعيار</th><th>متميز (٤)</th><th>متقن (٣)</th><th>نامٍ (٢)</th><th>مبتدئ (١)</th></tr></thead>
+      <tbody>
+        <tr><td>المفهوم العلمي</td><td>يفسر عمل التصميم بالمفهوم العلمي بدقة ويربطه بالدرس</td><td>يفسر بصورة صحيحة مع نقص بسيط</td><td>يذكر المفهوم دون ربط واضح</td><td>لا يربط التصميم بمفهوم علمي</td></tr>
+        <tr><td>التصميم والتحسين</td><td>نموذجان أو أكثر وتحسين مبرر بنتائج الاختبار</td><td>تحسين واحد مبرر</td><td>تحسين دون تبرير</td><td>نموذج واحد دون تحسين</td></tr>
+        <tr><td>التصميم والإبداع</td><td>تصميم جذاب ومتقن ينسجم مع وظيفته، وعرض بصري مؤثر</td><td>تصميم مرتب وجذاب</td><td>اهتمام محدود بالشكل</td><td>دون أي عناية بالتصميم</td></tr>
+        <tr><td>القياس والبيانات</td><td>قياسات متكررة وجدول ورسم بياني واستنتاج</td><td>قياسات وجدول واستنتاج</td><td>قياسات غير منظمة</td><td>لا توجد قياسات</td></tr>
+        <tr><td>الفريق والعرض</td><td>أدوار واضحة وعرض مقنع يجيب عن الأسئلة</td><td>تعاون جيد وعرض واضح</td><td>تعاون محدود</td><td>عمل فردي وعرض ناقص</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE -->
+<section id="guide" class="grid-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="k">دليل المعلم</div>
+        <h2>ثلاث طرق لاستخدام المختبر في الحصة</h2>
+      </div>
+    </div>
+    <div class="modes">
+      <div><b>عرض جماعي</b><p>اعرض المحاكاة على السبورة الذكية، واطلب من الطلاب التنبؤ قبل تحريك أي متغير، ثم ناقش الفرق بين التوقع والنتيجة.</p></div>
+      <div><b>محطات تعلم</b><p>محطة للمحاكاة على الأجهزة، ومحطة للتجربة العملية بالمواد البسيطة، ومحطة لسؤال التفكير؛ وتتنقل الفرق كل ١٠ دقائق.</p></div>
+      <div><b>تعلم منزلي</b><p>أرسل رابط الدرس للطلاب ليجربوا المحاكاة في البيت ويحضروا معهم نتيجة واحدة وسؤالًا واحدًا للحصة.</p></div>
+    </div>
+    <h3 style="font-size:20px;color:var(--navy);margin-top:40px">معايير اختيار مقطع يوتيوب قبل عرضه على الطلاب</h3>
+    <ul class="checklist">
+      <li>المصدر موثوق: قناة «عين دروس» الرسمية أولًا، ثم القنوات التعليمية المعروفة.</li>
+      <li>المحتوى مطابق للدرس ولمصطلحات كتاب الطالب.</li>
+      <li>لغة سليمة ومحتوى لائق، ويتوافق مع قيم المجتمع وتوجيهات وزارة التعليم.</li>
+      <li>التجربة آمنة، أو تظهر فيها احتياطات السلامة بوضوح.</li>
+      <li>مدة مناسبة للحصة (من ٣ إلى ٨ دقائق تقريبًا).</li>
+      <li>شاهده المعلم كاملًا قبل الحصة، ويعرضه بملء الشاشة دون التعليقات والمقترحات.</li>
+    </ul>
+    <p class="note" style="margin-top:26px">روجعت كل محاكاة على محتوى الدرس في كتاب الطالب، ومع كل منها ملاحظة بالشاشة أو الإعداد المطلوب. محاكيات فت (PhET) من جامعة كولورادو مجانية، وتفتح بالعربية إذا كانت ترجمتها متوفرة وإلا فبالإنجليزية. المصادر الأخرى (Concord وIRIS وCELLS alive وغيرها) مجانية وبالإنجليزية. يمكن تنزيل تطبيق PhET للعمل دون إنترنت. التجارب العملية تُنفذ بإشراف المعلم مع النظارات الواقية.</p>
+  </div>
+</section>
+
+</div>
+
+<!-- ABOUT (separate page) -->
+<div id="about">
+  <div class="about-hero">
+    <div class="wrap">
+      <img class="moe" src="data:image/png;base64,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" alt="شعار وزارة التعليم">
+      <div class="k">من نحن</div>
+      <h2>مجموعة العلوم في متوسطة شرحبيل بن حسنة</h2>
+      <p>فريق معلمي العلوم الذي أعدّ مختبر شرحبيل الافتراضي ومبادرة مختبر ستيم (STEAM)، ليجد كل طالب في الصفوف الأول والثاني والثالث المتوسط درسه ومحاكاته وتجربته في مكان واحد.</p>
+    </div>
+  </div>
+  <div class="about-body grid-paper">
+    <div class="wrap">
+      <div class="lead-card"><span class="mono" style="background:var(--teal2)" id="prMono"></span><div><small>الإشراف العام · مدير المدرسة</small><b>الأستاذ وابل عبد الإله عيوني</b></div></div>
+      <div class="team-h"><h3>إعداد</h3></div>
+      <div class="team" id="team"></div>
+      <div class="team-h" style="margin-top:30px"><h3>مراجعة</h3></div>
+      <div class="team"><div class="tcard"><span class="mono">أ.ب</span><b>الأستاذ أحمد بقبق</b></div></div>
+      <div class="mission">
+        <div><b>رسالتنا</b><p>أن يتعلم الطالب العلوم كما يمارسها العلماء: يتنبأ ويجرّب ويقيس ويستنتج.</p></div>
+        <div><b>ما نقدمه</b><p>محاكاة لكل درس، وتجربة بمواد بسيطة، وتحديات STEAM يبني فيها الطلاب ويحسّنون.</p></div>
+        <div><b>القادم</b><p>إضافة دروس الفصل الدراسي الثاني للصفوف الثلاثة.</p></div>
+      </div>
+      <div style="margin-top:40px"><a class="btn pri" href="#home">العودة إلى المختبر</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><b>مختبر شرحبيل الافتراضي</b><br>متوسطة شرحبيل بن حسنة · إدارة التعليم بمكة المكرمة</div>
+    <div>إعداد: <a href="#about" style="color:#5fd4c8">مجموعة العلوم بالمدرسة</a> · مراجعة: أ. أحمد بقبق<br>بإشراف مدير المدرسة: أ. وابل عبد الإله عيوني</div>
+  </div>
+</footer>
+
+<nav class="tabbar" aria-label="التنقل">
+  <a href="#home" data-t="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>الرئيسية</a>
+  <a href="#lab" data-t="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L5 19a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 19l-5-10V3"/><path d="M7.5 15h9"/></svg>الدروس</a>
+  <a href="#sims" data-t="sims"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg>المحاكيات</a>
+  <a href="#stem" data-t="stem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>ستيم</a>
+  <a href="#about" data-t="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2A5 5 0 0 1 21 19"/></svg>من نحن</a>
+</nav>
+<div class="ios-hint" id="iosHint"><button aria-label="إغلاق" id="iosX">×</button><b>ثبّت المختبر على الشاشة الرئيسية</b><br>اضغط زر المشاركة في سفاري ثم اختر «إضافة إلى الشاشة الرئيسية».</div>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= DATA ================= */
+const PHET = {
+ "pendulum-lab":["مختبر البندول","المتغيرات والتجربة المضبوطة"],
+ "projectile-motion":["حركة المقذوفات","التنبؤ والاختبار والقياس"],
+ "forces-and-motion-basics":["القوى والحركة: أساسيات","القوة المحصلة، السرعة، التسارع"],
+ "friction":["الاحتكاك","الاحتكاك وتحول الطاقة إلى حرارة"],
+ "balancing-act":["فعل التوازن","الرافعة وعزم القوة"],
+ "energy-skate-park-basics":["حديقة التزلج: أساسيات","طاقة الوضع والحركة وحفظ الطاقة"],
+ "density":["الكثافة","الكتلة والحجم والكثافة"],
+ "buoyancy-basics":["الطفو: المفاهيم الأساسية","الطفو والغوص"],
+ "states-of-matter-basics":["حالات المادة: أساسيات","حركة الجسيمات في الحالات الثلاث"],
+ "states-of-matter":["حالات المادة","تحولات الحالة والطاقة"],
+ "reactants-products-and-leftovers":["المتفاعلات والنواتج والفائض","التفاعل الكيميائي ونواتجه"],
+ "balancing-chemical-equations":["موازنة المعادلات الكيميائية","حفظ الكتلة في التفاعل"],
+ "build-an-atom":["بناء ذرة","البروتونات والنيوترونات والإلكترونات"],
+ "isotopes-and-atomic-mass":["النظائر والكتلة الذرية","النظائر ومتوسط الكتلة"],
+ "build-a-molecule":["بناء جزيء","العناصر والمركبات"],
+ "molecule-polarity":["قطبية الجزيء","السالبية الكهربائية والروابط"],
+ "concentration":["التركيز","المذاب والمذيب والتشبع"],
+ "molarity":["المولارية","كمية المذاب وتركيز المحلول"],
+ "ph-scale-basics":["مقياس الرقم الهيدروجيني: أساسيات","الحموضة والقاعدية في مواد يومية"],
+ "acid-base-solutions":["محاليل الأحماض والقواعد","القوي والضعيف وتوصيل الكهرباء"],
+ "gas-properties":["خصائص الغازات","الضغط والحجم ودرجة الحرارة"],
+ "under-pressure":["الضغط","ضغط السوائل والعمق"],
+ "energy-forms-and-changes":["أشكال الطاقة وتحولاتها","سلاسل تحولات الطاقة"],
+ "faradays-law":["قانون فاراداي","توليد الكهرباء بالمغناطيس"],
+ "wave-on-a-string":["موجة على وتر","السعة والطول الموجي والتردد"],
+ "waves-intro":["مقدمة في الموجات","انتشار الموجات"],
+ "diffusion":["الانتشار","حركة الجسيمات من التركيز الأعلى إلى الأقل"],
+ "membrane-transport":["النقل عبر الغشاء","النقل السلبي والنشط"],
+ "gene-expression-essentials":["أساسيات التعبير الجيني","من DNA إلى البروتين"],
+ "natural-selection":["الانتقاء الطبيعي","الجينات والصفات والطفرات"],
+ "rutherford-scattering":["تشتت رذرفورد","تجربة صفيحة الذهب واكتشاف النواة"],
+ "build-a-nucleus":["بناء نواة","استقرار النواة والتحلل"]
+};
+const phetRun = s => `https://phet.colorado.edu/sims/html/${s}/latest/${s}_all.html?locale=ar`;
+const EXT = {
+ tectonic:["مستكشف الصفائح (Tectonic Explorer)","Concord Consortium","https://tectonic-explorer.concord.org/"],
+ seismic:["مستكشف الزلازل والبراكين (Seismic Explorer)","Concord Consortium","https://seismic-explorer.concord.org/"],
+ irisPS:["الموجتان P وS (رسوم متحركة)","IRIS لعلوم الزلازل","https://www.iris.edu/hq/inclass/animation/p_wave_vs_s_wave"],
+ volcano:["باني البراكين (Volcano Builder)","Twig Science","https://www.go2.twigscience.com/volcano-builder"],
+ rock:["دورة الصخور التفاعلية","Annenberg Learner","https://www.learner.org/series/interactive-rock-cycle/"],
+ rsc:["الجدول الدوري التفاعلي","الجمعية الملكية للكيمياء (RSC)","https://periodic-table.rsc.org/"],
+ mitosis:["الانقسام المتساوي خطوة بخطوة","CELLS alive!","https://www.cellsalive.com/mitosis.htm"],
+ meiosis:["الانقسام المنصف خطوة بخطوة","CELLS alive!","https://www.cellsalive.com/meiosis.htm"],
+ dnaext:["مختبر استخلاص DNA الافتراضي","Learn.Genetics – جامعة يوتا","https://learn.genetics.utah.edu/content/labs/extraction/"],
+ photo:["العوامل المؤثرة في البناء الضوئي","iwant2study – وزارة التعليم بسنغافورة","https://iwant2study.org/ospsgx/index.php/573"],
+ osmo:["مختبرات الخاصية الأسموزية","LabXchange","https://about.labxchange.org/featured/osmosis-lab"],
+ circ:["الدورة الدموية التفاعلية","iwant2study – وزارة التعليم بسنغافورة","https://iwant2study.moe.edu.sg/sg.iwant2study.org/ospsg/index.php/interactive-resources/biology/1407-blood-circulation-interactive-simplified-circulatory-system-model"]
+};
+const resName = r => r.p ? PHET[r.p][0] : EXT[r.x][0];
+const phetInfo = s => `https://phet.colorado.edu/ar_SA/simulations/${s}`;
+
+const INNER = {
+ ph:["مختبر كاشف الكرنب","الرقم الهيدروجيني"],
+ heart:["القلب والنبض","جهاز الدوران"],
+ plates:["حدود الصفائح","الصفائح الأرضية"],
+ seismo:["جهاز رصد الزلازل","الموجات الزلزالية"],
+ punnett:["مربع بانيت","الوراثة"]
+};
+
+const L = (t,p,sims,ex,extra={}) => Object.assign({t,p,sims,ex},extra);
+const E = (t,m,s,q,w) => ({t,m,s,q,w});
+
+const GRADES = [
+{ n:1, name:"الأول المتوسط", color:"var(--g1)", units:[
+ {t:"العلم وتفاعلات الأجسام", ch:[
+  {t:"طبيعة العلم", ls:[
+   L("العلم وعملياته",20,[{"p": "pendulum-lab", "u": "غيّر طول الخيط فقط وثبّت الكتلة والزاوية، ثم قِس زمن الذبذبة: تدريب على المتغير المستقل والمتغير التابع والثوابت."}],E("أيّ الكرات ترتدّ أعلى؟",["كرة تنس","كرة مطاطية","كرة بلاستيكية","مسطرة متر","شريط لاصق"],["ثبّت المسطرة رأسيًا على الجدار.","أسقط كل كرة من ارتفاع ١ م دون دفعها.","سجّل أقصى ارتداد في ثلاث محاولات واحسب المتوسط.","حدّد المتغير المستقل والمتغير التابع والثوابت."],"لماذا نكرر المحاولة ثلاث مرات قبل أن نستنتج؟")),
+   L("النماذج العلمية",28,[{"p": "build-an-atom", "u": "مثال على النموذج الحاسوبي: قارن نموذج الذرة في المحاكاة بنموذج مادي من الصلصال، واذكر ما يوضحه كل منهما وما يعجز عنه."}],E("الصندوق الغامض",["علبة مغلقة فيها أجسام مجهولة","مغناطيس","ميزان"],["هزّ العلبة واستمع، ودوّن ملاحظاتك دون فتحها.","قرّب المغناطيس من جوانبها وقِس كتلتها.","ارسم نموذجًا لما تتوقع وجوده داخلها.","قارن نموذجك بنماذج زملائك، ثم افتح العلبة."],"كيف يشبه عملك عمل العلماء حين بنوا نموذج الذرة دون أن يروها؟")),
+   L("تقويم التفسيرات العلمية",32,[],E("اختبر ادعاء الإعلان",["ثلاثة أنواع من المناديل الورقية","ماء ملوّن","مخبار مدرّج","وعاء"],["اقرأ الادعاء: «منديلنا الأكثر امتصاصًا».","صمّم اختبارًا عادلًا: المساحة نفسها وكمية الماء نفسها.","اغمر كل منديل ١٠ ثوانٍ وقِس الماء المتبقي.","قرّر: هل تدعم البيانات الادعاء أم لا؟"],"ما الفرق بين الرأي والدليل العلمي؟"))
+  ]},
+  {t:"الحركة والقوى والآلات البسيطة", ls:[
+   L("الحركة",46,[{"p": "forces-and-motion-basics", "u": "شاشة «الحركة»: فعّل عرض السرعة، وأثّر بقوة ثابتة ثم أوقفها؛ صف متى تتغير السرعة (تسارع) ومتى تبقى ثابتة."}],E("احسب سرعة سيارتك",["سيارة لعبة","لوح منحدر","شريط قياس","ساعة إيقاف","كتب"],["ارفع اللوح بكتابين وأطلق السيارة من القمة.","قِس المسافة والزمن، واحسب السرعة = المسافة ÷ الزمن.","كرّر بثلاثة كتب ثم أربعة.","مثّل النتائج برسم بياني."],"ما العلاقة بين ارتفاع المنحدر والسرعة المتوسطة؟"),{stem:"balloon-car"}),
+   L("قوانين نيوتن للحركة",52,[{"p": "forces-and-motion-basics", "u": "شاشة «القوة المحصلة»: القوى المتزنة وغير المتزنة (القانون الأول)، وشاشة «التسارع»: أثر القوة والكتلة في التسارع (القانون الثاني)، وشاشة «الاحتكاك»."}],E("العملة العنيدة",["كوب","بطاقة كرتونية","قطعة نقد معدنية"],["ضع البطاقة فوق الكوب والعملة فوق البطاقة.","اسحب البطاقة أفقيًا بسرعة.","لاحظ أين تسقط العملة.","كرّر بسحب بطيء وقارن."],"أيّ قوانين نيوتن يفسّر ما حدث للعملة؟"),{stem:"balloon-car"}),
+   L("الشغل والآلات البسيطة",62,[{"p": "balancing-act", "u": "الرافعة: غيّر الكتل وبُعدها عن نقطة الارتكاز حتى يتزن اللوح، واستنتج العلاقة بين القوة وطول ذراعها."}],E("رافعة المسطرة",["مسطرة ٣٠ سم","قلم رصاص (نقطة ارتكاز)","قطع نقد متماثلة"],["ضع المسطرة على القلم عند منتصفها.","ضع ٤ قطع عند تدريج ٥ سم من أحد الطرفين.","ابحث عن موضع قطعتين على الجهة الأخرى يحقق الاتزان.","حرّك نقطة الارتكاز وسجّل ملاحظاتك."],"كيف تقلل الرافعة القوة اللازمة لرفع جسم؟"),{stem:"catapult"})
+  ]}
+ ]},
+ {t:"طبيعة المادة", ch:[
+  {t:"المادة وتغيراتها", ls:[
+   L("الخواص والتغيرات الفيزيائية",84,[{"p": "density", "u": "احسب الكثافة من الكتلة والحجم، وتعرّف مادة مجهولة من كثافتها."}, {"p": "states-of-matter-basics", "u": "سخّن المادة وبرّدها: تتغير حالتها ولا يتغير نوع جسيماتها، وهذا تغيّر فيزيائي."}],E("الكثافة بالإزاحة",["مخبار مدرّج","ماء","ميزان","مسمار، حصاة، ممحاة"],["قِس كتلة الجسم بالميزان.","سجّل حجم الماء قبل غمر الجسم وبعده؛ الفرق هو حجمه.","احسب الكثافة = الكتلة ÷ الحجم.","توقّع: هل يطفو الجسم أم يغوص؟ ثم اختبر."],"لماذا تُعدّ الكثافة خاصية فيزيائية؟")),
+   L("الخواص والتغيرات الكيميائية",91,[{"p": "reactants-products-and-leftovers", "u": "التفاعل الكيميائي يعيد ترتيب الذرات فتنتج مواد جديدة بخواص جديدة."}, {"p": "balancing-chemical-equations", "u": "حفظ الكتلة: عدد ذرات كل عنصر قبل التفاعل يساوي عددها بعده."}],E("بالون ينتفخ وحده",["قارورة بلاستيكية","خل","صودا الخبز","بالون","قمع"],["ضع ملعقتين من الصودا داخل البالون بالقمع.","اسكب ٥٠ مل من الخل في القارورة.","ثبّت البالون على الفوهة ثم ارفعه لتسقط الصودا.","سجّل الدلائل على حدوث تغيّر كيميائي."],"اذكر دليلين يثبتان أن التغير كيميائي.","ارتدِ النظارة الواقية، ولا تقرّب الفوهة من الوجه."))
+  ]},
+  {t:"الذرات والعناصر والجدول الدوري", ls:[
+   L("تركيب المادة",106,[{"p": "build-an-atom", "u": "أضف بروتونات ونيوترونات وإلكترونات، ولاحظ أن عدد البروتونات وحده يحدد نوع العنصر (العدد الذري)."}, {"p": "isotopes-and-atomic-mass", "u": "أضف نيوترونات إلى ذرة العنصر نفسه لتكوّن نظائره، وقارن كتلها."}],E("ذرة من الصلصال",["صلصال بثلاثة ألوان","سلك رفيع أو أطباق ورقية"],["اختر عنصرًا من العناصر العشرة الأولى.","كوّن النواة من البروتونات والنيوترونات.","وزّع الإلكترونات على مستويات الطاقة.","اعرض نموذجك واطلب من زميلك تخمين العنصر."],"أيّ الجسيمات يحدد نوع العنصر؟")),
+   L("العناصر والمركبات والمخاليط",111,[{"p": "build-a-molecule", "u": "كوّن جزيئات مثل H₂O وCO₂ وO₂، وفرّق بين جزيء العنصر وجزيء المركب."}, {"x": "rsc", "u": "ابحث عن العناصر الواردة في الدرس وصنّفها: فلزات ولافلزات وأشباه فلزات."}],E("افصل المخلوط",["رمل","ملح","برادة حديد","مغناطيس داخل كيس","ماء","ورق ترشيح وقمع","طبق"],["مرّر المغناطيس المغلّف لفصل البرادة.","أضف الماء وحرّك حتى يذوب الملح.","رشّح الخليط لفصل الرمل.","ضع الراشح في الشمس حتى يتبخر الماء ويبقى الملح."],"لماذا أمكن فصل مكونات المخلوط بطرق فيزيائية؟"),{stem:"water-filter"})
+  ]}
+ ]},
+ {t:"سطح الأرض المتغير", ch:[
+  {t:"الصخور والمعادن", ls:[
+   L("المعادن: جواهر الأرض",136,[{"p": "density", "u": "شاشة «الغموض»: تعرّف مادة مجهولة من كثافتها، كما تُستخدم الكثافة مع الصلادة والمخدش في تعرّف المعادن."}],E("مختبر الخدش والمخدش",["عينات معادن (كوارتز، كالسيت، جبس)","مسمار حديد","قطعة نقد نحاسية","بلاطة خزف غير مصقولة"],["اخدش كل عينة بالظفر، ثم بالعملة، ثم بالمسمار.","رتّب العينات حسب مقياس موس للصلادة.","امسح كل عينة على البلاطة وسجّل لون المخدش.","استخدم الكثافة في المحاكاة للتمييز بين معدنين متشابهين."],"لماذا يُعد المخدش أدق من اللون في تعرّف المعدن؟")),
+   L("أنواع الصخور",143,[{"x": "rock", "u": "تعرّف الأنواع الثلاثة للصخور وطريقة تكوّن كل نوع، وكيف يتحول صخر إلى آخر في دورة الصخور."}],E("دورة الصخور بأقلام الشمع",["برادة أقلام شمع ملونة","ورق قصدير","ماء ساخن (مع المعلم)","كتب ثقيلة"],["اجمع البرادة في طبقات ملونة (رواسب).","لفّها بالقصدير واضغطها بالكتب (صخر رسوبي).","اغمر اللفافة في الماء الساخن مع الضغط (صخر متحول).","صهر كامل ثم تبريد (صخر ناري)."],"ما العوامل التي تحوّل صخرًا إلى نوع آخر؟","الماء الساخن والصهر بيد المعلم فقط."))
+  ]},
+  {t:"القوى المشكّلة للأرض", ls:[
+   L("صفائح الأرض المتحركة",164,[{"x": "tectonic", "u": "حرّك صفيحتين متقاربتين أو متباعدتين، واعرض المقطع العرضي لترى تكوّن الجبال والأخاديد والبراكين."}],E("صفائح البسكويت",["بسكويت مستطيل","عسل أو دبس (يمثل الستار)","طبق"],["افرد طبقة من العسل في الطبق.","ضع قطعتي بسكويت متجاورتين فوقه.","حرّكهما متباعدتين، ثم متقاربتين، ثم بانزلاق جانبي.","صف ما يحدث عند كل نوع من الحدود."],"أيّ أنواع الحدود يفسّر اتساع البحر الأحمر؟"),{inner:"plates"}),
+   L("التجوية والتعرية وأثرهما",178,[],E("صندوق التعرية",["صينية بلاستيكية","رمل وتربة","كوب مثقوب","أحجار صغيرة","عشب أو قطن"],["كوّن منحدرًا من التربة في الصينية.","اسكب الماء من الكوب المثقوب وراقب المجرى.","أعد التجربة بعد وضع أحجار أو نبات.","قارن كمية التربة المنجرفة في الحالتين."],"كيف يقلل الغطاء النباتي من التعرية؟"),{stem:"erosion"})
+  ]}
+ ]}
+]},
+{ n:2, name:"الثاني المتوسط", color:"var(--g2)", units:[
+ {t:"دراسة المادة", ch:[
+  {t:"طبيعة العلم", ls:[
+   L("أسلوب العلم",20,[{"p": "pendulum-lab", "u": "صمّم تجربة مضبوطة: أيّ العوامل (الطول، الكتلة، الزاوية) يؤثر في زمن الذبذبة؟ غيّر عاملًا واحدًا في كل مرة."}],E("البندول البسيط",["خيط","صامولة أو ثقل","مسطرة","ساعة إيقاف","حامل"],["علّق الثقل بخيط طوله ٢٠ سم.","قِس زمن ١٠ اهتزازات واقسمه على ١٠.","غيّر الطول إلى ٤٠ ثم ٦٠ سم مع تثبيت الكتلة.","اكتب استنتاجك عن المتغير المؤثر في الزمن."],"لماذا نقيس زمن ١٠ اهتزازات بدل اهتزازة واحدة؟")),
+   L("حل المشكلات بطريقة علمية",24,[{"p": "projectile-motion", "u": "المشكلة: ما الزاوية التي تعطي أبعد مدى؟ اكتب فرضية، وغيّر الزاوية فقط، وسجّل المدى في جدول ثم استنتج."}],E("أبعد طائرة ورقية",["أوراق A4","مشابك ورق","شريط قياس"],["حدّد المشكلة: أيّ تصميم يطير أبعد؟","اكتب فرضية عن أثر المشبك في مقدمة الطائرة.","اختبر كل تصميم ٣ مرات من الخط نفسه.","حلّل النتائج وأعد التصميم."],"ما خطوات حل المشكلة التي طبقتها؟"))
+  ]},
+  {t:"المخاليط والمحاليل", ls:[
+   L("المحاليل والذائبية",40,[{"p": "concentration", "u": "أضف المذاب تدريجيًا حتى يظهر الراسب (محلول مشبع)، ثم أضف الماء ولاحظ تغيّر التركيز."}],E("سباق الذوبان",["سكر","ماء بارد وماء دافئ","كوبان شفافان","ملعقة","ساعة إيقاف"],["ضع ملعقة سكر في كل كوب في اللحظة نفسها.","حرّك العدد نفسه من المرات.","سجّل زمن الذوبان التام.","أضف ملاعق حتى يبدأ السكر بالترسب (التشبع)."],"ما أثر درجة الحرارة في الذائبية؟")),
+   L("المحاليل الحمضية والقاعدية",50,[{"p": "ph-scale-basics", "u": "اختبر مواد يومية وصنّفها حمضية أو قاعدية أو متعادلة، ولاحظ أثر التخفيف بالماء في الرقم الهيدروجيني."}, {"p": "acid-base-solutions", "u": "قارن الحمض القوي بالضعيف باستخدام ورق الكاشف وجهاز التوصيل الكهربائي."}],E("كاشف الكرنب الأحمر",["ملفوف أحمر","ماء ساخن","مصفاة","أكواب","خل، ليمون، صودا الخبز، صابون"],["انقع الملفوف المقطع في الماء الساخن ١٠ دقائق ثم صفّه.","وزّع الكاشف على الأكواب.","أضف مادة مختلفة إلى كل كوب.","صنّف: أحمر حمضي، بنفسجي متعادل، أخضر قاعدي."],"لماذا يتغير لون الكاشف؟","لا تتذوق أي مادة في المختبر."),{inner:"ph"})
+  ]}
+ ]},
+ {t:"المادة والطاقة", ch:[
+  {t:"حالات المادة", ls:[
+   L("المادة",72,[{"p": "states-of-matter-basics", "u": "شاشة «الحالات»: قارن ترتيب الجسيمات وحركتها في الصلب والسائل والغاز."}],E("جسيمات تتحرك",["كوب ماء بارد","كوب ماء ساخن","صبغة طعام","قطارة"],["ضع قطرة صبغة في كل كوب في اللحظة نفسها.","راقب سرعة الانتشار في الكوبين.","ارسم نموذج الجسيمات في كل كوب."],"ما علاقة سرعة الجسيمات بدرجة الحرارة؟")),
+   L("الحرارة وتحولات المادة",77,[{"p": "states-of-matter", "u": "شاشة «تغيّر الحالة»: أضف طاقة حرارية أو انزعها، وتتبّع درجة الحرارة أثناء الانصهار والغليان والتجمد."}, {"p": "energy-forms-and-changes", "u": "شاشة «مقدمة»: سخّن الماء وتابع انتقال الطاقة الحرارية حتى يتحول إلى بخار."}],E("منحنى تسخين الماء",["ثلج مجروش","كأس زجاجية","مصدر حرارة","مقياس حرارة","ساعة"],["قِس درجة حرارة الثلج.","سخّن وسجّل الحرارة كل دقيقة.","لاحظ ثبات الحرارة أثناء الانصهار والغليان.","ارسم منحنى التسخين."],"أين تذهب الطاقة حين تثبت درجة الحرارة؟","التسخين بإشراف المعلم."),{stem:"zeer"}),
+   L("سلوك الموائع",85,[{"p": "under-pressure", "u": "ضغط السائل يزداد بزيادة العمق وكثافة السائل، ولاحظ أثر الضغط الجوي."}, {"p": "buoyancy-basics", "u": "قوة الطفو ومبدأ أرخميدس: قارن كثافة الجسم بكثافة السائل لتتنبأ بطفوه أو غوصه."}, {"p": "gas-properties", "u": "العلاقة بين ضغط الغاز المحصور وحجمه ودرجة حرارته، كما وردت في الدرس."}],E("غواص ديكارت",["قارورة بلاستيكية مملوءة ماء","قطارة زجاجية أو غطاء قلم مع صلصال"],["اضبط القطارة لتطفو بالكاد.","أغلق القارورة بإحكام.","اضغط على القارورة ولاحظ الغواص يغوص.","اترك الضغط فيعود للطفو."],"كيف يغيّر الضغط كثافة الغواص؟"),{stem:"foil-boat"})
+  ]},
+  {t:"الطاقة وتحولاتها", ls:[
+   L("ما الطاقة؟",104,[{"p": "energy-skate-park-basics", "u": "تتبّع تحوّل طاقة الوضع إلى طاقة حركية وبالعكس، ولاحظ ثبات الطاقة الكلية."}],E("كرة على مسار",["مسار بلاستيكي أو أنبوب مشقوق","كرة زجاجية","كوب ورقي","مسطرة"],["أطلق الكرة من ارتفاعات مختلفة.","قِس المسافة التي تدفع إليها الكوب.","اربط الارتفاع بطاقة الوضع وطاقة الحركة."],"متى تكون طاقة حركة الكرة أكبر ما يمكن؟")),
+   L("تحولات الطاقة",109,[{"p": "energy-forms-and-changes", "u": "شاشة «الأنظمة»: ابنِ سلسلة من مصدر طاقة إلى محوّل إلى مستهلك، وسمِّ كل تحوّل."}, {"p": "faradays-law", "u": "حرّك المغناطيس داخل الملف: تتحول الطاقة الحركية إلى طاقة كهربائية، وهي فكرة المولد الكهربائي."}],E("سلسلة تحولات الطاقة",["مصباح يدوي","بطارية","مروحة صغيرة","لوح شمسي صغير"],["تتبّع تحولات الطاقة في المصباح اليدوي.","شغّل المروحة باللوح الشمسي.","ارسم مخطط سلسلة التحولات."],"لماذا لا تتحول الطاقة كلها إلى الشكل المفيد؟"),{stem:"solar-oven"})
+  ]}
+ ]},
+ {t:"أجهزة جسم الإنسان ١", ch:[
+  {t:"جهازا الدوران والمناعة", ls:[
+   L("جهاز الدوران",134,[{"x": "circ", "u": "تتبّع مسار الدم بين القلب والرئتين وباقي أجزاء الجسم في الدورتين الصغرى والكبرى."}],E("النبض والنشاط",["ساعة إيقاف","جدول تسجيل"],["قِس نبضك في الرسغ ١٥ ثانية واضربه في ٤.","اقفز في مكانك دقيقة واحدة.","قِس النبض مباشرة، ثم بعد دقيقتين.","مثّل النتائج بالأعمدة."],"لماذا يزداد معدل النبض مع النشاط؟"),{inner:"heart",stem:"stethoscope"}),
+   L("المناعة والمرض",143,[],E("كيف تنتقل الجراثيم؟",["لمعة (جليتر) أو مسحوق ملوّن","صابون","ماء","مناديل"],["ضع لمعة على يد طالب (تمثل الجراثيم).","يصافح زميلين ويلمس بعض الأدوات.","تتبّع انتشار اللمعة.","قارن تنظيف اليد بالماء وحده ثم بالماء والصابون."],"لماذا يُعد غسل اليدين خط الدفاع الأول؟"))
+  ]},
+  {t:"الهضم والتنفس والإخراج", ls:[
+   L("الجهاز الهضمي والمواد الغذائية",164,[],E("كشف النشا",["محلول اليود (مع المعلم)","خبز، بطاطس، أرز، تفاح","قطارة","أطباق"],["ضع قطرة يود على كل غذاء.","اللون الأزرق الداكن دليل على النشا.","امضغ قطعة خبز مدة دقيقة ولاحظ تغيّر طعمها إلى الحلو."],"ما دور اللعاب في الهضم الكيميائي؟","اليود لا يُبلع ويلطّخ الملابس.")),
+   L("جهازا التنفس والإخراج",175,[],E("ماذا نزفر؟",["ماء الجير (مع المعلم)","ماصّة","كوبان","مضخة هواء صغيرة"],["انفخ بالماصّة في ماء الجير برفق.","لاحظ التعكّر الدال على ثاني أكسيد الكربون.","قارن بضخ هواء الغرفة في الكوب الآخر."],"من أين يأتي ثاني أكسيد الكربون في هواء الزفير؟","انفخ فقط ولا تسحب بالماصّة."),{stem:"lung"})
+  ]}
+ ]}
+]},
+{ n:3, name:"الثالث المتوسط", color:"var(--g3)", units:[
+ {t:"طبيعة العلم وتغيرات الأرض", ch:[
+  {t:"طبيعة العلم", ls:[
+   L("أسلوب العلم",20,[{"p": "pendulum-lab", "u": "اختبر فرضية عن العوامل المؤثرة في زمن الذبذبة، وحدّد المتغيرات والثوابت قبل البدء."}],E("أيّ كوب يحفظ الحرارة؟",["أكواب (ورق، بلاستيك، معدن، فلين)","ماء دافئ","مقياس حرارة"],["املأ الأكواب بالكمية نفسها من الماء الدافئ.","سجّل الحرارة كل دقيقتين مدة ١٠ دقائق.","ارسم خطًا بيانيًا لكل كوب.","حدّد المتغيرات واكتب استنتاجك."],"ما المتغير المستقل وما المتغير التابع؟")),
+   L("عمل العلم",26,[],E("الدقة والضبط في القياس",["مسطرة","شريط قياس","ميزان","أجسام مختلفة"],["قِس الجسم نفسه ثلاث مرات بأداتين مختلفتين.","احسب المتوسط والفرق بين القراءات.","ناقش أيّ الأداتين أدق ولماذا."],"ما الفرق بين الدقة والضبط؟"),{stem:"egg-drop"}),
+   L("العلم والتقنية والمجتمع",38,[],E("تقنية من بيتي",["ورقة تحليل","أداة منزلية (مكيّف، ثلاجة، غسالة…)"],["اختر أداة وحدّد المبدأ العلمي الذي تعمل به.","اذكر فوائدها للمجتمع وأثرها في البيئة.","اقترح تحسينًا يقلل استهلاك الطاقة."],"كيف تؤثر التقنية في المجتمع إيجابًا وسلبًا؟"))
+  ]},
+  {t:"تغيرات الأرض", ls:[
+   L("الزلازل",52,[{"x": "irisPS", "u": "شاهد اتجاه حركة جسيمات الأرض مع الموجتين P وS، ولماذا تصل الموجة P أولًا."}],E("موجات النابض",["نابض لعبة (سلينكي)","شريط ملوّن"],["ادفع طرف النابض للأمام: موجة طولية (P).","حرّك الطرف جانبيًا: موجة مستعرضة (S).","علّم حلقة بالشريط وراقب اتجاه حركتها في كل موجة."],"أيّ الموجتين تصل أولًا إلى محطة الرصد؟"),{inner:"seismo",stem:"shake-table"}),
+   L("البراكين",61,[{"x": "volcano", "u": "غيّر كمية السيليكا والغاز في الصهارة، ولاحظ نوع الثوران وشكل البركان الناتج."}],E("لزوجة الصهارة",["عسل","زيت","ماء","شامبو","لوح مائل","ساعة إيقاف"],["ضع ملعقة من كل سائل أعلى اللوح.","أطلقها معًا.","سجّل زمن وصول كل سائل إلى الأسفل.","اربط اللزوجة بنوع الثوران."],"لماذا يكون ثوران الصهارة الغنية بالسيليكا انفجاريًا؟"),{stem:"volcano"}),
+   L("الصفائح الأرضية وعلاقتها بالزلازل والبراكين",66,[{"x": "seismic", "u": "اعرض مواقع الزلازل والبراكين الحقيقية مع حدود الصفائح، ولاحظ تركزها عند الحدود."}, {"x": "tectonic", "u": "اختبر ما يحدث عند كل نوع من حدود الصفائح في المقطع العرضي."}],E("خريطة النار",["خريطة صامتة للعالم","ملصقات بلونين","قائمة بمواقع زلازل وبراكين حديثة"],["علّم مواقع ٢٠ زلزالًا و٢٠ بركانًا.","ارسم حدود الصفائح على الخريطة.","لاحظ تطابق المواقع مع حزام النار."],"لماذا تتركز الزلازل والبراكين عند حدود الصفائح؟"),{inner:"plates"})
+  ]}
+ ]},
+ {t:"أسس الحياة", ch:[
+  {t:"أنشطة وعمليات في الخلية", ls:[
+   L("أنشطة في الخلية",88,[{"p": "membrane-transport", "u": "النقل السلبي (الانتشار البسيط والمسهّل) والنقل النشط عبر الغشاء الخلوي: أضف القنوات والمضخات ولاحظ حركة الجزيئات."}, {"x": "osmo", "u": "الخاصية الأسموزية: تجربة البيضة في محاليل مختلفة التركيز."}, {"x": "photo", "u": "البناء الضوئي: غيّر شدة الضوء وتركيز ثاني أكسيد الكربون، وعُدّ فقاعات الأكسجين."}],E("بيضة بلا قشرة",["بيضة نيئة","خل","ماء مقطر","ماء مالح مركّز","كوب","ميزان"],["انقع البيضة في الخل ٢٤–٤٨ ساعة حتى تذوب القشرة.","انقلها إلى الماء المقطر يومًا، ثم إلى الماء المالح.","قِس كتلتها في كل مرة.","فسّر التغير بالخاصية الأسموزية."],"في أيّ اتجاه تحرّك الماء في كل حالة؟ ولماذا؟")),
+   L("انقسام الخلية وتكاثرها",99,[{"x": "mitosis", "u": "شغّل مراحل الانقسام المتساوي وأوقفها عند كل مرحلة لتصف ما يحدث للكروموسومات."}, {"x": "meiosis", "u": "قارن الانقسام المنصف بالمتساوي في عدد الخلايا الناتجة وعدد الكروموسومات."}],E("مراحل الانقسام بالخيوط",["خيوط صوف ملونة","أطباق ورقية","مشابك","بطاقات"],["مثّل الكروموسومات بالخيوط داخل الطبق (النواة).","رتّب مراحل الانقسام المتساوي على أطباق متتالية.","اكتب أهم حدث في كل مرحلة.","قارن عدد الكروموسومات قبل الانقسام وبعده."],"لماذا تحمل الخليتان الناتجتان المعلومات الوراثية نفسها؟"))
+  ]},
+  {t:"الوراثة", ls:[
+   L("مادة الوراثة DNA",122,[{"p": "gene-expression-essentials", "u": "من الجين إلى البروتين: كيف تُنسخ المعلومة الوراثية من DNA ثم تُترجم إلى بروتين."}, {"x": "dnaext", "u": "خطوات استخلاص DNA من الخلايا، وقارنها بتجربة الفراولة في الصف."}],E("استخلاص DNA من الفراولة",["فراولة","كيس بسحّاب","صابون سائل","ملح","ماء","كحول بارد","مصفاة"],["اهرس الفراولة في الكيس مع محلول الصابون والملح.","رشّح الخليط في كوب شفاف.","اسكب الكحول البارد ببطء على جدار الكوب.","التقط الخيوط البيضاء الظاهرة: إنها DNA."],"ما دور الصابون في التجربة؟","الكحول قابل للاشتعال؛ أبعده عن أي لهب."),{stem:"dna-model"}),
+   L("علم الوراثة",128,[],E("عملات الوراثة",["قطعتا نقد","ورق لاصق (A على وجه وa على الآخر)"],["كل عملة تمثل أحد الأبوين (Aa).","ارمِ العملتين ٤٠ مرة وسجّل الطرز الجينية.","احسب النسب وقارنها بمربع بانيت."],"لماذا تقترب النتائج من ١:٢:١ كلما زاد عدد الرميات؟"),{inner:"punnett"})
+  ]}
+ ]},
+ {t:"كيمياء المادة", ch:[
+  {t:"تركيب الذرة", ls:[
+   L("نماذج الذرة",150,[{"p": "rutherford-scattering", "u": "أطلق جسيمات ألفا على صفيحة الذهب، وقارن نموذج طومسون بنموذج رذرفورد، واستنتج وجود النواة."}, {"p": "build-an-atom", "u": "ابنِ ذرة ووزّع الإلكترونات على مستويات الطاقة."}],E("رذرفورد في الصف",["لوح كرتون","جسم مخفي تحته","كرات زجاجية"],["ضع جسمًا مجهول الشكل تحت اللوح.","دحرج الكرات من جهات مختلفة.","سجّل مسارات الارتداد.","استنتج شكل الجسم وحجمه."],"ماذا استنتج رذرفورد من ارتداد بعض جسيمات ألفا؟")),
+   L("النواة",159,[{"p": "build-a-nucleus", "u": "غيّر عدد البروتونات والنيوترونات، ولاحظ استقرار النواة وأنواع التحلل الإشعاعي وعمر النصف."}, {"p": "isotopes-and-atomic-mass", "u": "قارن نظائر العنصر الواحد، واحسب متوسط الكتلة الذرية."}],E("عمر النصف بالعملات",["١٠٠ قطعة نقد","علبة"],["رجّ العلبة وأفرغها على الطاولة.","أزل القطع التي ظهر وجهها (تحللت).","سجّل عدد المتبقي، وكرّر حتى تنتهي القطع.","ارسم المتبقي مقابل عدد الرميات."],"ماذا يعني عمر النصف؟"))
+  ]},
+  {t:"الجدول الدوري", ls:[
+   L("مقدمة في الجدول الدوري",178,[{"x": "rsc", "u": "تتبّع ترتيب العناصر حسب العدد الذري، وقارن الدورات والمجموعات وتدرّج الخواص."}, {"p": "build-an-atom", "u": "لاحظ موقع العنصر في الجدول الدوري يتغير كلما غيّرت عدد البروتونات."}],E("كن مندليف",["بطاقات ٢٠ عنصرًا عليها الكتلة والخواص"],["رتّب البطاقات حسب الكتلة الذرية.","اجمع العناصر المتشابهة في أعمدة.","اترك فراغًا لعنصر مفقود وتنبأ بخواصه."],"لماذا رُتّب الجدول الدوري الحديث حسب العدد الذري؟")),
+   L("العناصر الممثلة",185,[{"x": "rsc", "u": "اختر مجموعات العناصر الممثلة مثل الفلزات القلوية والهالوجينات والغازات النبيلة، وقارن خواصها."}],E("من يوصل الكهرباء؟",["بطارية","مصباح صغير","أسلاك","ألومنيوم، نحاس، رصاص قلم، كبريت، بلاستيك"],["كوّن دائرة كهربائية مفتوحة.","اختبر كل عينة بين طرفي الدائرة.","صنّف العينات: فلز، لافلز، شبه فلز."],"أين تقع الفلزات في الجدول الدوري؟")),
+   L("العناصر الانتقالية",192,[{"x": "rsc", "u": "استكشف العناصر الانتقالية مثل الحديد والنحاس، والعناصر الداخلية (اللانثانيدات والأكتينيدات)، واستخداماتها."}],E("سباق الصدأ",["مسامير حديد","مسمار مجلفن","أنابيب","ماء، ماء مالح، زيت"],["ضع مسمارًا في كل وسط.","راقبها أسبوعًا وصوّرها يوميًا.","قارن كمية الصدأ في كل أنبوب."],"كيف تحمي الجلفنة الحديد من الصدأ؟"))
+  ]}
+ ]}
+]}
+];
+
+const STEM = [
+ {id:"balloon-car",g:1,t:"سيارة البالون",lesson:"قوانين نيوتن للحركة",time:"حصتان",ch:"صمّم سيارة يدفعها بالون لتقطع أطول مسافة في خط مستقيم.",m:["علبة عصير أو كرتون","أغطية قوارير (عجلات)","أعواد شواء","ماصّات","بالون","شريط لاصق"],cr:["تقطع ٣ م على الأقل","لا محركات ولا بطاريات","مواد معاد تدويرها فقط"],S:"قانون نيوتن الثالث: الهواء يندفع للخلف فتندفع السيارة للأمام، وأثر الاحتكاك.",T:"تصوير المحاولة بالجوال وقياس الزمن بالتصوير البطيء.",E:"تصميم المحاور والعجلات لتقليل الاحتكاك وتوجيه فوهة البالون.",M:"السرعة = المسافة ÷ الزمن، وجدول المحاولات ورسمها بيانيًا."},
+ {id:"catapult",g:1,t:"منجنيق الملاعق",lesson:"الشغل والآلات البسيطة",time:"حصة",ch:"ابنِ منجنيقًا يطلق كرة ورقية لتصيب هدفًا على بعد ٢ م.",m:["أعواد مثلجات","أربطة مطاطية","ملعقة بلاستيكية","غطاء قارورة","كرات ورقية"],cr:["الدقة أهم من المسافة","٥ محاولات لكل فريق","القاعدة لا تُثبَّت بالطاولة"],S:"الرافعة ونقطة الارتكاز، وتحول طاقة المرونة إلى طاقة حركة.",T:"منقلة لقياس زاوية الإطلاق.",E:"ضبط موضع نقطة الارتكاز وعدد الأربطة.",M:"متوسط البعد عن الهدف، والعلاقة بين الزاوية والمدى."},
+ {id:"water-filter",g:1,t:"مرشح المياه",lesson:"العناصر والمركبات والمخاليط",time:"حصتان",ch:"صمّم مرشحًا يجعل كوبًا من الماء العكر أصفى ما يمكن.",m:["قارورة مقطوعة","قطن","فحم نشط","رمل ناعم","حصى","قطعة قماش"],cr:["أصفى ماء خلال ٥ دقائق","أكبر كمية ماء مسترجعة","الماء الناتج لا يُشرب"],S:"المخاليط وطرق فصلها بالترشيح والامتزاز.",T:"مقياس عكارة بسيط: ورقة مخططة توضع خلف الكوب.",E:"ترتيب الطبقات وسماكتها.",M:"نسبة الماء المسترجع = الناتج ÷ المسكوب × ١٠٠."},
+ {id:"erosion",g:1,t:"حاجز ضد السيول",lesson:"التجوية والتعرية وأثرهما",time:"حصتان",ch:"احمِ قرية من الرمل على منحدر من سيل مائي.",m:["صينية","رمل","أحجار صغيرة","أعواد","قطع قماش","عشب صناعي","كوب مثقوب"],cr:["أقل كمية رمل منجرفة","الحاجز لا يغطي القرية","كمية الماء نفسها لكل الفرق"],S:"التعرية بالماء وأثر السدود والغطاء النباتي.",T:"مخبار لقياس الرمل المنجرف.",E:"سدود ومصاطب وقنوات تصريف.",M:"نسبة الرمل المحفوظ قبل التحسين وبعده."},
+ {id:"zeer",g:2,t:"الثلاجة الصحراوية",lesson:"الحرارة وتحولات المادة",time:"أسبوع (قياس يومي)",ch:"حافظ على برودة علبة ماء دون كهرباء أطول وقت ممكن.",m:["إناءان مختلفا الحجم","رمل","ماء","قماش مبلل","مقياس حرارة"],cr:["انخفاض ٥ درجات عن حرارة الغرفة","دون ثلج أو كهرباء"],S:"التبخر يمتص الطاقة الحرارية فيبرد ما حوله.",T:"مقياس حرارة رقمي وتسجيل القراءات.",E:"اختيار مادة الإناء وسماكة طبقة الرمل الرطب.",M:"جدول الحرارة كل ١٠ دقائق ومنحنى التبريد."},
+ {id:"foil-boat",g:2,t:"قارب القصدير",lesson:"سلوك الموائع",time:"حصة",ch:"ابنِ قاربًا من ورقة قصدير ٢٠×٢٠ سم يحمل أكبر عدد من قطع النقد.",m:["ورق قصدير","قطع نقد متماثلة","حوض ماء","مسطرة"],cr:["ورقة واحدة فقط","يُحسب الحمل قبل الغرق مباشرة"],S:"الطفو ومبدأ أرخميدس والكثافة.",T:"ميزان لقياس الحمل.",E:"شكل البدن وارتفاع الجدران وتوزيع الحمل.",M:"حجم القارب وحساب الحمل المتوقع ومقارنته بالفعلي."},
+ {id:"solar-oven",g:2,t:"الفرن الشمسي",lesson:"تحولات الطاقة",time:"حصتان",ch:"اصنع فرنًا من صندوق يرفع حرارة كوب ماء تحت شمس الظهيرة.",m:["صندوق بيتزا","ورق قصدير","غلاف بلاستيكي شفاف","ورق أسود","مسطرة","مقياس حرارة"],cr:["٥٠° س داخل الصندوق خلال ٣٠ دقيقة","دون كهرباء"],S:"تحول الطاقة الإشعاعية إلى حرارية وامتصاص الألوان الداكنة.",T:"مقياس حرارة رقمي.",E:"زاوية العاكس وإحكام العزل.",M:"منحنى الحرارة مع الزمن والزاوية الأفضل للعاكس."},
+ {id:"lung",g:2,t:"نموذج الرئة",lesson:"جهازا التنفس والإخراج",time:"حصة",ch:"اصنع نموذجًا يوضح الشهيق والزفير وحركة الحجاب الحاجز.",m:["قارورة مقطوعة","بالونان صغيران","ماصّتان","بالون كبير أو قفاز مطاطي","صلصال"],cr:["البالونان ينتفخان عند سحب الغشاء","إغلاق محكم"],S:"العلاقة بين حجم التجويف الصدري وضغط الهواء.",T:"قياس محيط البالون بشريط.",E:"إحكام الإغلاق وحجم الغشاء.",M:"العلاقة بين مقدار السحب ومحيط البالون."},
+ {id:"stethoscope",g:2,t:"السماعة الطبية",lesson:"جهاز الدوران",time:"حصة",ch:"صمّم سماعة تسمع بها دقات قلب زميلك بوضوح.",m:["قمعان صغيران","خرطوم بلاستيكي ٥٠ سم","بالون","شريط لاصق"],cr:["عدّ النبض يطابق نبض الرسغ","طول الخرطوم لا يتجاوز ٥٠ سم"],S:"انتقال الصوت وأصوات صمامات القلب.",T:"مقارنة بتطبيق قياس النبض في الجوال.",E:"حجم القمع وشد الغشاء.",M:"النبض في ١٥ ثانية × ٤، والفرق بين الطريقتين."},
+ {id:"shake-table",g:3,t:"مبنى يتحدى الزلزال",lesson:"الزلازل",time:"حصتان",ch:"ابنِ برجًا بارتفاع ٣٠ سم يصمد على طاولة اهتزاز ٢٠ ثانية.",m:["أعواد خشبية","صلصال أو حلوى مارشملو","ورق مقوى","صينية فوق كرات زجاجية","أربطة مطاطية"],cr:["الارتفاع ٣٠ سم على الأقل","يصمد ٢٠ ثانية","٥٠ عودًا كحد أقصى"],S:"الموجات الزلزالية وأثرها في المباني.",T:"التصوير البطيء لتحليل الاهتزاز.",E:"التدعيم القطري والقاعدة العريضة والعزل.",M:"نسبة الارتفاع إلى عرض القاعدة."},
+ {id:"egg-drop",g:3,t:"كبسولة البيضة",lesson:"عمل العلم",time:"حصتان",ch:"احمِ بيضة نيئة عند إسقاطها من ارتفاع ٣ أمتار.",m:["ورق","أكياس","ماصّات","شريط لاصق","كوب ورقي"],cr:["كتلة الكبسولة أقل من ١٥٠ غ","لا مواد تغليف جاهزة"],S:"زيادة زمن التصادم تقلل القوة المؤثرة.",T:"تصوير السقوط وقياس الزمن.",E:"المظلة والوسائد وامتصاص الصدمة.",M:"حساب متوسط السرعة وكتلة الكبسولة."},
+ {id:"volcano",g:3,t:"بركانان: هادئ وانفجاري",lesson:"البراكين",time:"حصة",ch:"صمّم بركانًا يثور بنمطين مختلفين، وفسّر الفرق باللزوجة.",m:["قارورة صغيرة","عجينة أو جبس","خل","صودا الخبز","صابون سائل","نشا","صبغة"],cr:["ثوران هادئ وآخر انفجاري","تفسير مكتوب للفرق"],S:"اللزوجة ونوع الثوران، وحرّات المملكة مثل حرة رهط.",T:"تصوير الثوران ومقارنة الارتفاع.",E:"التحكم في اللزوجة وضيق الفوهة.",M:"قياس مسافة تدفق اللابة في كل نمط."},
+ {id:"dna-model",g:3,t:"نموذج DNA",lesson:"مادة الوراثة DNA",time:"حصة",ch:"ابنِ نموذج DNA من ١٠ أزواج قواعد يُظهر الالتواء المزدوج والتزاوج الصحيح.",m:["ماصّات أو معكرونة","خيط","خرز أو حلوى بأربعة ألوان","أعواد أسنان"],cr:["تزاوج صحيح A–T و C–G","الالتواء ثابت","مفتاح ألوان واضح"],S:"تركيب DNA وتزاوج القواعد النيتروجينية.",T:"تصوير النموذج ومشاركته رقميًا.",E:"ثبات النموذج وتوازن الالتواء.",M:"عدد القواعد ونسبة A إلى T و C إلى G."}
+];
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const ar = n => String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+const store = {get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove("show"),1800)}
+const allLessons=[];GRADES.forEach(g=>g.units.forEach((u,ui)=>u.ch.forEach((c,ci)=>c.ls.forEach((l,li)=>{l.g=g.n;l.unit=u.t;l.chap=c.t;l.ui=ui;l.ci=ci;l.li=li;allLessons.push(l)}))));
+const GRADE_SHORT=["","الأول المتوسط","الثاني المتوسط","الثالث المتوسط"];
+const ytSearch=q=>"https://www.youtube.com/results?search_query="+encodeURIComponent(q);
+const ytLesson=l=>ytSearch("عين دروس "+l.t+" علوم "+GRADE_SHORT[l.g]);
+const ytExp=l=>ytSearch(YQ[l.g+"|"+l.t]||("تجربة "+l.ex.t));
+const GOALS={"1|العلم وعملياته": "أن يصمم الطالب تجربة مضبوطة ويحدد متغيراتها.", "1|النماذج العلمية": "أن يبني الطالب نموذجًا لشيء لا يراه، ويقوّمه بالأدلة.", "1|تقويم التفسيرات العلمية": "أن يميّز الطالب بين الادعاء والدليل العلمي.", "1|الحركة": "أن يحسب الطالب السرعة المتوسطة ويمثلها بيانيًا.", "1|قوانين نيوتن للحركة": "أن يفسّر الطالب القصور الذاتي بقانون نيوتن الأول.", "1|الشغل والآلات البسيطة": "أن يستنتج الطالب شرط اتزان الرافعة.", "1|الخواص والتغيرات الفيزيائية": "أن يحسب الطالب كثافة جسم صلب غير منتظم الشكل.", "1|الخواص والتغيرات الكيميائية": "أن يستدل الطالب على حدوث تغيّر كيميائي بالملاحظة.", "1|تركيب المادة": "أن يمثّل الطالب تركيب الذرة بجسيماتها الثلاثة.", "1|العناصر والمركبات والمخاليط": "أن يفصل الطالب مكونات مخلوط بطرق فيزيائية.", "1|المعادن: جواهر الأرض": "أن يتعرّف الطالب المعادن بالصلادة والمخدش.", "1|أنواع الصخور": "أن يمثّل الطالب تحوّل الصخور في دورة الصخور.", "1|صفائح الأرض المتحركة": "أن يصف الطالب حركة الصفائح عند أنواع الحدود الثلاثة.", "1|التجوية والتعرية وأثرهما": "أن يقارن الطالب أثر الغطاء النباتي في التعرية.", "2|أسلوب العلم": "أن يحدد الطالب العامل المؤثر في زمن البندول بتجربة مضبوطة.", "2|حل المشكلات بطريقة علمية": "أن يطبّق الطالب خطوات حل المشكلة لتحسين تصميم.", "2|المحاليل والذائبية": "أن يستنتج الطالب أثر درجة الحرارة في سرعة الذوبان والذائبية.", "2|المحاليل الحمضية والقاعدية": "أن يصنّف الطالب مواد منزلية إلى حمضية وقاعدية بكاشف طبيعي.", "2|المادة": "أن يربط الطالب سرعة حركة الجسيمات بدرجة الحرارة.", "2|الحرارة وتحولات المادة": "أن يرسم الطالب منحنى التسخين ويفسّر ثبات درجة الحرارة.", "2|سلوك الموائع": "أن يفسّر الطالب الطفو والغوص بتغيّر الضغط والكثافة.", "2|ما الطاقة؟": "أن يربط الطالب ارتفاع الجسم بطاقته.", "2|تحولات الطاقة": "أن يتتبع الطالب سلسلة تحولات الطاقة في أجهزة بسيطة.", "2|جهاز الدوران": "أن يقيس الطالب أثر النشاط البدني في معدل النبض.", "2|المناعة والمرض": "أن يستنتج الطالب طرق انتقال المسببات وأهمية غسل اليدين.", "2|الجهاز الهضمي والمواد الغذائية": "أن يكشف الطالب عن النشا ويستنتج دور اللعاب.", "2|جهازا التنفس والإخراج": "أن يثبت الطالب وجود ثاني أكسيد الكربون في هواء الزفير.", "3|أسلوب العلم": "أن يصمم الطالب تجربة يقارن فيها العزل الحراري لمواد مختلفة.", "3|عمل العلم": "أن يميّز الطالب بين الدقة والضبط في القياس.", "3|العلم والتقنية والمجتمع": "أن يحلل الطالب أثر تقنية يومية في المجتمع والبيئة.", "3|الزلازل": "أن يميّز الطالب الموجات الطولية من الموجات المستعرضة.", "3|البراكين": "أن يربط الطالب لزوجة الصهارة بنوع الثوران.", "3|الصفائح الأرضية وعلاقتها بالزلازل والبراكين": "أن يستنتج الطالب العلاقة بين حدود الصفائح وأماكن الزلازل والبراكين.", "3|أنشطة في الخلية": "أن يفسّر الطالب تغيّر كتلة البيضة بالخاصية الأسموزية.", "3|انقسام الخلية وتكاثرها": "أن يرتّب الطالب مراحل الانقسام المتساوي ويصف كل مرحلة.", "3|مادة الوراثة DNA": "أن يستخلص الطالب DNA من خلايا نباتية ويشاهده.", "3|علم الوراثة": "أن يقارن الطالب النسب الفعلية بالمتوقعة في مربع بانيت.", "3|نماذج الذرة": "أن يستنتج الطالب شكل جسم مخفي من مسارات الارتداد كما فعل رذرفورد.", "3|النواة": "أن يمثّل الطالب مفهوم عمر النصف بنموذج احتمالي.", "3|مقدمة في الجدول الدوري": "أن يرتب الطالب العناصر حسب خواصها كما فعل مندليف.", "3|العناصر الممثلة": "أن يصنّف الطالب العناصر إلى فلزات ولافلزات بالتوصيل الكهربائي.", "3|العناصر الانتقالية": "أن يقارن الطالب سرعة صدأ الحديد في أوساط مختلفة."};
+const YQ={"1|العلم وعملياته": "تجربة المتغير المستقل والمتغير التابع", "1|النماذج العلمية": "النماذج العلمية تجربة الصندوق المغلق", "1|تقويم التفسيرات العلمية": "تجربة امتصاص المناديل الورقية اختبار عادل", "1|الحركة": "تجربة حساب السرعة المتوسطة سيارة على منحدر", "1|قوانين نيوتن للحركة": "تجربة القصور الذاتي العملة والكوب", "1|الشغل والآلات البسيطة": "تجربة الرافعة ونقطة الارتكاز", "1|الخواص والتغيرات الفيزيائية": "تجربة حساب الكثافة بالإزاحة المخبار المدرج", "1|الخواص والتغيرات الكيميائية": "تجربة الخل وصودا الخبز والبالون", "1|تركيب المادة": "نموذج الذرة بالصلصال", "1|العناصر والمركبات والمخاليط": "تجربة فصل مخلوط الرمل والملح وبرادة الحديد", "1|المعادن: جواهر الأرض": "اختبار صلادة المعادن ولون المخدش", "1|أنواع الصخور": "دورة الصخور تجربة أقلام الشمع", "1|صفائح الأرض المتحركة": "نموذج حدود الصفائح الأرضية", "1|التجوية والتعرية وأثرهما": "تجربة التعرية بالماء والغطاء النباتي", "2|أسلوب العلم": "تجربة البندول البسيط طول الخيط", "2|حل المشكلات بطريقة علمية": "حل المشكلات بطريقة علمية تجربة الطائرة الورقية", "2|المحاليل والذائبية": "تجربة ذوبان السكر في الماء الساخن والبارد", "2|المحاليل الحمضية والقاعدية": "تجربة كاشف الملفوف الأحمر", "2|المادة": "تجربة انتشار صبغة الطعام في الماء الساخن والبارد", "2|الحرارة وتحولات المادة": "تجربة منحنى تسخين الماء الانصهار والغليان", "2|سلوك الموائع": "تجربة غواص ديكارت", "2|ما الطاقة؟": "تجربة طاقة الوضع وطاقة الحركة", "2|تحولات الطاقة": "تحولات الطاقة تجربة علمية", "2|جهاز الدوران": "قياس النبض قبل التمرين وبعده", "2|المناعة والمرض": "تجربة انتقال الجراثيم وغسل اليدين بالصابون", "2|الجهاز الهضمي والمواد الغذائية": "تجربة الكشف عن النشا باليود", "2|جهازا التنفس والإخراج": "تجربة ماء الجير وثاني أكسيد الكربون في الزفير", "3|أسلوب العلم": "تجربة العزل الحراري للأكواب", "3|عمل العلم": "الدقة والضبط في القياس", "3|العلم والتقنية والمجتمع": "العلم والتقنية والمجتمع", "3|الزلازل": "الموجات الطولية والمستعرضة بالنابض", "3|البراكين": "تجربة لزوجة الصهارة ونوع الثوران", "3|الصفائح الأرضية وعلاقتها بالزلازل والبراكين": "حزام النار توزيع الزلازل والبراكين", "3|أنشطة في الخلية": "تجربة البيضة في الخل الخاصية الأسموزية", "3|انقسام الخلية وتكاثرها": "مراحل الانقسام المتساوي", "3|مادة الوراثة DNA": "تجربة استخلاص DNA من الفراولة", "3|علم الوراثة": "مربع بانيت تجربة رمي العملات", "3|نماذج الذرة": "تجربة رذرفورد صفيحة الذهب", "3|النواة": "عمر النصف تجربة العملات", "3|مقدمة في الجدول الدوري": "ترتيب مندليف للجدول الدوري", "3|العناصر الممثلة": "تجربة توصيل الفلزات واللافلزات للكهرباء", "3|العناصر الانتقالية": "تجربة صدأ الحديد في أوساط مختلفة"};
+const ARTS={"balloon-car": "تصميم هيكل انسيابي وتلوينه، ورسم شعار للفريق على السيارة.", "catapult": "تصميم هدف ملوّن بحلقات نقاط، وتزيين المنجنيق بهوية الفريق.", "water-filter": "ملصق توعوي عن ترشيد المياه يوضح طبقات المرشح بالرسم.", "erosion": "مجسم قرية بألوان طبيعية ولوحة إرشادية للتوعية بأخطار السيول.", "zeer": "زخرفة الإناء بنقوش مستوحاة من التراث السعودي.", "foil-boat": "تصميم شكل القارب واختيار اسمه ورسم رايته.", "solar-oven": "تصميم واجهة الفرن وبطاقة تعليمات مصوّرة لاستخدامه.", "lung": "رسم توضيحي ملوّن لأجزاء الجهاز التنفسي يُعرض بجوار النموذج.", "stethoscope": "تصميم مريح وجذاب للسماعة، وملصق «اعرف نبضك».", "shake-table": "تصميم واجهة المبنى بطابع معماري سعودي.", "egg-drop": "تصميم الكبسولة على هيئة مركبة فضائية مع شعار للمهمة.", "volcano": "تشكيل البركان وتلوينه على هيئة حرّة بركانية، مع لوحة تعريفية.", "dna-model": "اختيار ألوان متناسقة لمفتاح القواعد، وعرض النموذج قطعةً فنية."};
+STEM.forEach(s=>s.A=ARTS[s.id]);
+const stemById=Object.fromEntries(STEM.map(s=>[s.id,s]));
+
+/* stats */
+(function(){
+ const sims=new Set(),ext=new Set();allLessons.forEach(l=>l.sims.forEach(r=>r.p?sims.add(r.p):ext.add(r.x)));
+ const items=[[allLessons.length,"درسًا من ٣ كتب"],[sims.size+ext.size,"محاكاة ومصدرًا تفاعليًا"],[allLessons.length,"تجربة بمواد بسيطة"],[STEM.length,"تحديًا في مبادرة STEAM"]];
+ $("#stats").innerHTML=items.map(([n,t])=>`<div class="stat"><b>${ar(n)}</b><small>${t}</small></div>`).join("");
+})();
+
+/* ================= LAB ================= */
+let curG=store.get("lab_g",1), curF="all", curQ="";
+function renderGrades(){
+ $("#grades").innerHTML=GRADES.map(g=>{
+  const n=g.units.reduce((a,u)=>a+u.ch.reduce((b,c)=>b+c.ls.length,0),0);
+  return `<button class="gtab ${g.n===curG?'on':''}" style="--gc:${g.color}" data-g="${g.n}"><span class="num" style="background:${g.color}">${ar(g.n)}</span><span><b>الصف ${g.name}</b><small>${ar(g.units.length)} وحدات · ${ar(n)} درسًا</small></span></button>`}).join("");
+ document.querySelectorAll(".gtab").forEach(b=>b.onclick=()=>{curG=+b.dataset.g;store.set("lab_g",curG);renderGrades();renderUnits()});
+}
+function match(l){
+ if(curF==="ph"&&!l.sims.length)return false;
+ if(curF==="in"&&!l.inner)return false;
+ if(curF==="st"&&!l.stem)return false;
+ if(curQ){const h=(l.t+" "+l.ex.t+" "+l.chap+" "+l.unit+" "+l.sims.map(resName).join(" ")).toLowerCase();if(!h.includes(curQ.toLowerCase()))return false}
+ return true;
+}
+function renderUnits(){
+ const g=GRADES.find(x=>x.n===curG);
+ let html="", any=false;
+ const pool = curQ ? GRADES : [g];
+ pool.forEach(G=>G.units.forEach((u,ui)=>{
+  let uh="";
+  u.ch.forEach((c,ci)=>{
+   const ls=c.ls.filter(match); if(!ls.length)return;
+   uh+=`<div class="chap"><div class="chap-h"><i>${ar(ci+1+ui*2)}</i>الفصل: ${c.t}</div><div class="cards">`+
+   ls.map(l=>`<button class="card" data-k="${l.g}-${l.ui}-${l.ci}-${l.li}"><div class="meta"><span>الدرس ${ar(l.li+1)}</span><span>ص ${ar(l.p)}</span></div><h4>${l.t}</h4><div class="ex">تجربة: ${l.ex.t}</div><div class="badges">${l.sims.filter(r=>r.p).length?`<span class="bdg ph">محاكي فت ${ar(l.sims.filter(r=>r.p).length)}</span>`:""}${l.sims.filter(r=>r.x).length?`<span class="bdg">مصدر عالمي ${ar(l.sims.filter(r=>r.x).length)}</span>`:""}${l.inner?`<span class="bdg in">شرحبيل</span>`:""}<span class="bdg yt">يوتيوب</span>${l.stem?`<span class="bdg st">STEAM</span>`:""}</div></button>`).join("")+`</div></div>`;
+  });
+  if(uh){any=true;html+=`<div class="unit" style="--gc:${G.color}"><div class="unit-h"><span class="tag">${curQ?"الصف "+G.name+" · ":""}الوحدة ${ar(ui+1)}</span><h3>${u.t}</h3></div>${uh}</div>`}
+ }));
+ $("#units").innerHTML=any?html:`<div class="empty">لا توجد دروس مطابقة. جرّب كلمة أخرى أو ألغِ التصفية.</div>`;
+ document.querySelectorAll(".card").forEach(c=>c.onclick=()=>openLesson(c.dataset.k));
+}
+document.querySelectorAll(".toolbar .chip").forEach(b=>b.onclick=()=>{curF=b.dataset.f;document.querySelectorAll(".toolbar .chip").forEach(x=>x.classList.toggle("on",x===b));renderUnits()});
+$("#q").addEventListener("input",e=>{curQ=e.target.value.trim();renderUnits()});
+
+const extIco=`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1f4f86" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>`;
+const flaskIco=`<svg width="22" height="22" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L5 19a2 2 0 0 0 1.8 2.9h10.4A2 2 0 0 0 19 19l-5-10V3" fill="none" stroke="#1f6f40" stroke-width="1.7" stroke-linejoin="round"/><path d="M7.5 15h9" stroke="#1f6f40" stroke-width="1.7"/></svg>`;
+
+function openModal(html){$("#sheet").innerHTML=html;$("#modal").classList.add("open");document.body.style.overflow="hidden";$("#sheet .x").onclick=closeModal}
+function closeModal(){$("#modal").classList.remove("open");document.body.style.overflow=""}
+$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+function lessonText(l){
+ return `مختبر شرحبيل الافتراضي — الصف ${GRADES[l.g-1].name}\nالدرس: ${l.t} (ص ${l.p})\n\nالتجربة: ${l.ex.t}\nالهدف: ${GOALS[l.g+"|"+l.t]||""}\nالمواد: ${l.ex.m.join("، ")}\nالخطوات:\n${l.ex.s.map((s,i)=>(i+1)+"- "+s).join("\n")}\nسؤال التفكير: ${l.ex.q}${l.ex.w?"\nالسلامة: "+l.ex.w:""}${l.sims.length?"\n\nالمحاكاة:\n"+l.sims.map(r=>resName(r)+": "+(r.p?phetRun(r.p):EXT[r.x][2])+"\n  "+r.u).join("\n"):""}\n\nيوتيوب:\nشرح الدرس (عين دروس): ${ytLesson(l)}\nمقطع التجربة: ${ytExp(l)}`;
+}
+function openLesson(k){
+ const [g,ui,ci,li]=k.split("-").map(Number);
+ const l=GRADES[g-1].units[ui].ch[ci].ls[li];
+ const ph=l.sims.filter(r=>r.p), ex=l.sims.filter(r=>r.x);
+ const simRow=r=>r.p
+   ?`<div class="sim"><div class="ico">${flaskIco}</div><div class="nm"><b>${PHET[r.p][0]}</b><small>محاكي فت (PhET) · جامعة كولورادو</small><p class="use">${r.u}</p></div><div class="acts"><a class="run" href="${phetRun(r.p)}" target="_blank" rel="noopener">شغّل</a><a class="inf" href="${phetInfo(r.p)}" target="_blank" rel="noopener">صفحتها</a></div></div>`
+   :`<div class="sim ext"><div class="ico">${extIco}</div><div class="nm"><b>${EXT[r.x][0]}</b><small>${EXT[r.x][1]} · بالإنجليزية</small><p class="use">${r.u}</p></div><div class="acts"><a class="run" href="${EXT[r.x][2]}" target="_blank" rel="noopener">افتح</a></div></div>`;
+ const st=l.stem?stemById[l.stem]:null;
+ const goal=GOALS[l.g+"|"+l.t]||"";
+ openModal(`<div class="sheet-h"><button class="x" aria-label="إغلاق">×</button><small>الصف ${GRADES[g-1].name} · ${l.unit} · ${l.chap} · ص ${ar(l.p)}</small><h3>${l.t}</h3></div>
+ <div class="sheet-b">
+  <div class="track phet"><div class="track-h"><span class="tico">فت</span><div><b>محاكي فت</b><small>محاكاة جامعة كولورادو المطابقة لمحتوى الدرس</small></div></div>
+   ${ph.length?ph.map(simRow).join(""):`<p class="note" style="margin:0">لا توجد في فت محاكاة مطابقة لمحتوى هذا الدرس${ex.length?"، فاخترنا لك مصدرًا عالميًا موثوقًا أدناه.":l.inner?"، فصممنا له محاكيًا في مختبر شرحبيل.":"، والنشاط الرئيس هو التجربة العملية ومقاطع يوتيوب."}</p>`}
+   ${ex.length?`<div style="margin-top:10px">${ex.map(simRow).join("")}</div>`:""}
+  </div>
+  ${l.inner?`<div class="track shr"><div class="track-h"><span class="tico">ش</span><div><b>محاكي شرحبيل</b><small>صُمم في مختبرنا ويعمل داخل الموقع</small></div></div><button class="btn line" id="goInner">افتح «${INNER[l.inner][0]}»</button></div>`:""}
+  <div class="track yt"><div class="track-h"><span class="tico">▶</span><div><b>تجارب يوتيوب</b><small>بحث موجّه يبدأ بقناة «عين دروس» الرسمية لوزارة التعليم</small></div></div>
+   <div class="ytbtns">
+    <a href="${ytLesson(l)}" target="_blank" rel="noopener"><b>شرح الدرس من «عين دروس»</b><small>${l.t} · ${GRADE_SHORT[l.g]}</small></a>
+    <a href="${ytExp(l)}" target="_blank" rel="noopener"><b>مقطع التجربة</b><small>${YQ[l.g+"|"+l.t]||l.ex.t}</small></a>
+   </div>
+   <p class="note" style="margin:8px 0 0">شاهد المقطع كاملًا قبل عرضه، واختر ما يطابق معايير اختيار المقاطع في دليل المعلم.</p>
+  </div>
+  <div class="track exp"><div class="track-h"><span class="tico">ت</span><div><b>تجربة مختبر شرحبيل: ${l.ex.t}</b><small>بمواد بسيطة متوفرة في المدرسة والبيت</small></div></div>
+   ${goal?`<div class="goal"><b>الهدف:</b> ${goal}</div>`:""}
+   <div class="mats" style="margin-bottom:14px">${l.ex.m.map(x=>`<span>${x}</span>`).join("")}</div>
+   <ol class="steps">${l.ex.s.map(x=>`<li>${x}</li>`).join("")}</ol>
+   <div class="q"><b>سؤال التفكير:</b> ${l.ex.q}</div>
+   ${l.ex.w?`<div class="warn"><b>السلامة:</b> ${l.ex.w}</div>`:""}
+  </div>
+  ${st?`<div class="track st"><div class="track-h"><span class="steam-word"><i class="S">S</i><i class="T">T</i><i class="E">E</i><i class="A">A</i><i class="M">M</i></span><div><b>تحدي STEAM المرتبط</b><small>${st.time}</small></div></div><button class="btn line" id="goStem">${st.t} — ${st.ch}</button></div>`:""}
+  <div class="row-btns"><button class="btn pri" id="cpy">انسخ بطاقة الدرس</button></div>
+  <p class="note" style="margin-top:8px">تُنسخ البطاقة نصًا لتلصقها في مجموعة الصف أو في خطة الدرس.</p>
+ </div>`);
+ if(l.inner) $("#goInner").onclick=()=>{closeModal();showSim(l.inner);location.hash="sims";document.getElementById("sims").scrollIntoView()};
+ if(st) $("#goStem").onclick=()=>openStem(st.id);
+ $("#cpy").onclick=()=>copy(lessonText(l));
+}
+function copy(t){try{navigator.clipboard.writeText(t).then(()=>toast("تم النسخ"),()=>toast("تعذّر النسخ في هذا المتصفح"))}catch(e){toast("تعذّر النسخ في هذا المتصفح")}}
+
+/* ================= STEM ================= */
+const CYCLE=[["اسأل","ما المشكلة؟","يحدد الفريق المشكلة والمعايير (ما يجب تحقيقه) والقيود (المواد والزمن والتكلفة)."],["تخيّل","ما الحلول الممكنة؟","عصف ذهني لأكبر عدد من الأفكار دون حكم، ثم اختيار فكرة واحدة بالأدلة."],["خطّط","ارسم وقِس","رسم التصميم بالأبعاد وتوزيع الأدوار وقائمة المواد."],["ابنِ","النموذج الأول","بناء النموذج الأول بسرعة؛ الهدف أن يُختبر لا أن يكون كاملًا."],["اختبر وحسّن","البيانات تقرر","اختبار متكرر وتسجيل النتائج في جدول، ثم تغيير متغير واحد في كل تحسين."],["شارك","اعرض وبرّر","عرض التصميم وشرح المفهوم العلمي وما تعلمه الفريق من الإخفاق."]];
+let curC=0;
+function renderCycle(){
+ $("#cycle").innerHTML=CYCLE.map((c,i)=>`<button class="${i===curC?'on':''}" data-i="${i}"><b>${ar(i+1)}. ${c[0]}</b><small>${c[1]}</small></button>`).join("");
+ $("#cycleDetail").innerHTML=`<b style="color:var(--navy)">${CYCLE[curC][0]}:</b> ${CYCLE[curC][2]}`;
+ document.querySelectorAll("#cycle button").forEach(b=>b.onclick=()=>{curC=+b.dataset.i;renderCycle()});
+}
+let stemG=0;
+function renderStem(){
+ const list=STEM.filter(s=>!stemG||s.g===stemG);
+ $("#stemgrid").innerHTML=list.map(s=>`<button class="pcard" data-id="${s.id}"><div class="meta"><span>الصف ${GRADES[s.g-1].name}</span><span>${s.time}</span></div><h4>${s.t}</h4><p>${s.ch}</p><div class="note">الدرس: ${s.lesson}</div><div class="steam"><span class="S">S</span><span class="T">T</span><span class="E">E</span><span class="A">A</span><span class="M">M</span></div></button>`).join("");
+ document.querySelectorAll(".pcard").forEach(c=>c.onclick=()=>openStem(c.dataset.id));
+}
+document.querySelectorAll("#stemFilter button").forEach(b=>b.onclick=()=>{stemG=+b.dataset.g;document.querySelectorAll("#stemFilter button").forEach(x=>x.classList.toggle("on",x===b));renderStem()});
+function openStem(id){
+ const s=stemById[id];
+ openModal(`<div class="sheet-h"><button class="x" aria-label="إغلاق">×</button><small>مبادرة مختبر ستيم STEAM · الصف ${GRADES[s.g-1].name} · ${s.lesson} · ${s.time}</small><h3>${s.t}</h3></div>
+ <div class="sheet-b">
+  <div class="blk"><h5>التحدي</h5><p style="margin:0;font-size:17px">${s.ch}</p></div>
+  <div class="blk"><h5>المواد</h5><div class="mats">${s.m.map(x=>`<span>${x}</span>`).join("")}</div></div>
+  <div class="blk"><h5>المعايير والقيود</h5><ol class="steps">${s.cr.map(x=>`<li>${x}</li>`).join("")}</ol></div>
+  <div class="blk"><h5>أين STEAM في هذا التحدي؟</h5><div class="smap"><div style="--c:var(--S)"><b>S · العلوم</b>${s.S}</div><div style="--c:var(--T)"><b>T · التقنية</b>${s.T}</div><div style="--c:var(--E)"><b>E · الهندسة</b>${s.E}</div><div style="--c:var(--A)"><b>A · الفنون</b>${s.A}</div><div style="--c:var(--M)"><b>M · الرياضيات</b>${s.M}</div></div></div>
+  <div class="row-btns"><button class="btn pri" id="cpy">انسخ بطاقة التحدي</button></div>
+ </div>`);
+ $("#cpy").onclick=()=>copy(`مبادرة مختبر ستيم STEAM — مختبر شرحبيل الافتراضي\n${s.t} (الصف ${GRADES[s.g-1].name} · ${s.lesson})\n\nالتحدي: ${s.ch}\nالمواد: ${s.m.join("، ")}\nالمعايير: ${s.cr.join("؛ ")}\n\nS العلوم: ${s.S}\nT التقنية: ${s.T}\nE الهندسة: ${s.E}\nA الفنون: ${s.A}\nM الرياضيات: ${s.M}\nالزمن: ${s.time}`);
+}
+
+/* ================= BUILT-IN SIMS ================= */
+let raf=null, timers=[];
+function stopSim(){if(raf)cancelAnimationFrame(raf);raf=null;timers.forEach(clearInterval);timers=[]}
+const SIMS={};
+function showSim(id){
+ stopSim();
+ $("#simtabs").innerHTML=Object.keys(INNER).map(k=>`<button class="${k===id?'on':''}" data-s="${k}">${INNER[k][0]}<small>${INNER[k][1]}</small></button>`).join("");
+ document.querySelectorAll("#simtabs button").forEach(b=>b.onclick=()=>showSim(b.dataset.s));
+ SIMS[id]();
+}
+function setupCanvas(cv){
+ const r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;
+ cv.width=Math.max(1,r.width*d);cv.height=Math.max(1,r.height*d);
+ const c=cv.getContext("2d");c.setTransform(d,0,0,d,0,0);return [c,r.width,r.height];
+}
+function stage(viz,ctrl){$("#simstage").innerHTML=`<div class="stage"><div class="viz">${viz}</div><div class="ctrl">${ctrl}</div></div>`}
+
+/* --- pH --- */
+SIMS.ph=function(){
+ const subs=[["عصير الليمون",2],["الخل",3],["مشروب غازي",3.5],["الحليب",6.5],["ماء مقطر",7],["صودا الخبز",8.5],["معجون الأسنان",9.5],["الصابون",10],["الأمونيا",11.5],["منظف الأفران",13]];
+ const col=p=>{const st=[[1,[200,30,60]],[3,[222,60,120]],[5,[170,70,170]],[7,[120,80,180]],[8,[70,100,200]],[10,[40,150,150]],[12,[60,170,70]],[14,[215,200,40]]];
+  for(let i=0;i<st.length-1;i++){const[a,c1]=st[i],[b,c2]=st[i+1];if(p<=b){const t=Math.max(0,(p-a)/(b-a));return `rgb(${c1.map((v,j)=>Math.round(v+(c2[j]-v)*t)).join(",")})`}}return "rgb(215,200,40)"};
+ stage(`<svg viewBox="0 0 400 330" width="100%" height="100%" id="phsvg">
+  <defs><linearGradient id="scale" x1="0" x2="1">${Array.from({length:15},(_,i)=>`<stop offset="${i/14}" stop-color="${col(i)}"/>`).join("")}</linearGradient><clipPath id="bk"><path d="M140 70h120v170a20 20 0 0 1-20 20h-80a20 20 0 0 1-20-20z"/></clipPath></defs>
+  <g clip-path="url(#bk)"><rect x="130" y="130" width="140" height="140" id="liq" fill="${col(7)}" style="transition:fill .6s"/><path id="wave" d="M130 130 Q150 124 170 130 T210 130 T250 130 T290 130 V140 H130Z" fill="rgba(255,255,255,.25)"/></g>
+  <path d="M132 64h136M140 64v176a20 20 0 0 0 20 20h80a20 20 0 0 0 20-20V64" fill="none" stroke="#0B2545" stroke-width="3"/>
+  ${[0,1,2,3].map(i=>`<line x1="140" x2="${i%2?160:170}" y1="${150+i*25}" y2="${150+i*25}" stroke="#0B2545" stroke-opacity=".35"/>`).join("")}
+  <rect x="30" y="285" width="340" height="16" rx="8" fill="url(#scale)"/>
+  ${[0,7,14].map(v=>`<text x="${30+v/14*340}" y="320" text-anchor="middle" font-size="12" fill="#5B6B7F">${ar(v)}</text>`).join("")}
+  <text x="52" y="278" font-size="12" fill="#5B6B7F" text-anchor="middle">قاعدي</text><text x="348" y="278" font-size="12" fill="#5B6B7F" text-anchor="middle">حمضي</text>
+  <path id="mk" d="M0 0l-7-11h14z" fill="#0B2545" transform="translate(200,284)"/>
+ </svg>`,
+ `<div class="sub">الصف الثاني · المحاليل الحمضية والقاعدية</div><h3>مختبر كاشف الكرنب الأحمر</h3><p>أضف مادة إلى كاشف الكرنب ولاحظ اللون، ثم اقرأ موقعها على مقياس الرقم الهيدروجيني.</p>
+ <div class="field"><label>المادة</label><div class="seg" id="phSeg">${subs.map((s,i)=>`<button data-i="${i}">${s[0]}</button>`).join("")}</div></div>
+ <div class="field"><label>أو اضبط الرقم الهيدروجيني يدويًا <output id="phO">٧</output></label><input type="range" id="phR" min="0" max="14" step="0.5" value="7"></div>
+ <div class="readout"><div><small>الرقم الهيدروجيني</small><b id="phV">٧</b></div><div><small>التصنيف</small><b id="phC">متعادل</b></div></div>
+ <div class="insight" id="phI"></div>`);
+ const set=(p,name)=>{
+  $("#liq").setAttribute("fill",col(p));
+  // RTL scale: acid on right
+  $("#mk").setAttribute("transform",`translate(${370-p/14*340},284)`);
+  const t=ar(p).replace(".","٫");$("#phV").textContent=t;$("#phO").textContent=t;$("#phR").value=p;
+  const c=p<6.5?"حمضي":p>7.5?"قاعدي":"متعادل";$("#phC").textContent=c;
+  const tip=p<3?"حمض قوي نسبيًا: يحوّل الكاشف إلى الأحمر.":p<6.5?"حمض ضعيف: لون وردي مائل إلى البنفسجي.":p<=7.5?"متعادل: يبقى الكاشف بنفسجيًا.":p<11?"قاعدة: يتحول الكاشف إلى الأزرق ثم الأخضر.":"قاعدة قوية: أخضر يميل إلى الأصفر. هذه المواد كاوية.";
+  $("#phI").innerHTML=(name?`<b>${name}:</b> `:"")+tip+` كل درجة على المقياس تعني فرقًا في الحموضة بمقدار ١٠ أضعاف.`;
+  document.querySelectorAll("#phSeg button").forEach(b=>b.classList.toggle("on",name===b.textContent));
+ };
+ // fix scale orientation labels to match RTL marker
+ document.querySelectorAll("#phsvg text").forEach(t=>{const v=t.textContent;if(v==="٠")t.setAttribute("x",370);else if(v==="١٤")t.setAttribute("x",30)});
+ document.querySelectorAll("#phsvg stop").forEach((s,i,arr)=>s.setAttribute("stop-color",col(14-i)));
+ document.querySelectorAll("#phSeg button").forEach(b=>b.onclick=()=>{const s=subs[+b.dataset.i];set(s[1],s[0])});
+ $("#phR").oninput=e=>set(+e.target.value,"");
+ let ph=0;const anim=()=>{ph+=.04;const w=$("#wave");if(!w)return;const o=Math.sin(ph)*6;w.setAttribute("d",`M130 130 Q150 ${124+o} 170 130 T210 130 T250 130 T290 130 V140 H130Z`);raf=requestAnimationFrame(anim)};anim();
+ set(7,"ماء مقطر");
+};
+
+/* --- Heart --- */
+SIMS.heart=function(){
+ const acts=[["نوم",55],["راحة",72],["مشي",100],["صعود الدرج",125],["جري",160]];
+ stage(`<canvas id="hc"></canvas>`,
+ `<div class="sub">الصف الثاني · جهاز الدوران</div><h3>القلب والنبض</h3><p>غيّر النشاط ولاحظ سرعة ضخ القلب وتخطيط النبض وحجم الدم المدفوع في الدقيقة.</p>
+ <div class="field"><label>النشاط</label><div class="seg" id="hSeg">${acts.map((a,i)=>`<button data-i="${i}">${a[0]}</button>`).join("")}</div></div>
+ <div class="field"><label>معدل النبض <output id="hO"></output></label><input type="range" id="hR" min="45" max="190" value="72"></div>
+ <div class="readout"><div><small>نبضة في الدقيقة</small><b id="hV"></b></div><div><small>دم مدفوع في الدقيقة (تقريبًا)</small><b id="hL"></b></div></div>
+ <div class="field" style="margin-top:14px"><label>قِس نبضك الآن</label><div class="row-btns"><button class="btn line" id="hT">ابدأ ١٥ ثانية</button><input id="hN" type="number" min="0" max="60" placeholder="عدد النبضات" style="width:130px;font-family:inherit;font-size:15px;border:1px solid var(--line);border-radius:9px;padding:8px"><button class="btn line" id="hX">احسب</button></div></div>
+ <div class="insight" id="hI">ضع إصبعيك على الرسغ أسفل الإبهام، واضغط «ابدأ»، وعدّ النبضات حتى يتوقف المؤقت.</div>`);
+ let bpm=72;
+ const cv=$("#hc");let [c,W,H]=setupCanvas(cv);
+ const set=v=>{bpm=v;$("#hR").value=v;$("#hO").textContent=ar(v);$("#hV").textContent=ar(v);$("#hL").textContent=ar((v*70/1000).toFixed(1)).replace(".","٫")+" لتر";
+  document.querySelectorAll("#hSeg button").forEach((b,i)=>b.classList.toggle("on",Math.abs(acts[i][1]-v)<3))};
+ document.querySelectorAll("#hSeg button").forEach(b=>b.onclick=()=>set(acts[+b.dataset.i][1]));
+ $("#hR").oninput=e=>set(+e.target.value);
+ $("#hT").onclick=()=>{let s=15;$("#hT").disabled=true;$("#hI").textContent="عُدّ النبضات… "+ar(s);const t=setInterval(()=>{s--;if(s<=0){clearInterval(t);$("#hT").disabled=false;$("#hI").textContent="توقف! اكتب عدد النبضات واضغط «احسب».";}else $("#hI").textContent="عُدّ النبضات… "+ar(s)},1000);timers.push(t)};
+ $("#hX").onclick=()=>{const n=+$("#hN").value;if(!n){$("#hI").textContent="اكتب عدد النبضات أولًا.";return}const v=n*4;$("#hI").innerHTML=`نبضك ≈ <b>${ar(v)}</b> نبضة في الدقيقة (${ar(n)} × ٤). المعدل الطبيعي في الراحة لعمرك تقريبًا ٦٠–١٠٠.`;set(Math.max(45,Math.min(190,v)))};
+ set(72);
+ let phase=0,last=performance.now(),trace=[],parts=[];for(let i=0;i<46;i++)parts.push(Math.random());
+ const ecg=x=>{x=x%1;if(x<.1)return 0;if(x<.14)return -.12*Math.sin((x-.1)/.04*Math.PI);if(x<.2)return 0;if(x<.22)return .15;if(x<.25)return -1;if(x<.28)return .35;if(x<.4)return 0;if(x<.52)return -.25*Math.sin((x-.4)/.12*Math.PI);return 0};
+ const draw=now=>{
+  const dt=Math.min(.05,(now-last)/1000);last=now;phase+=dt*bpm/60;
+  if(cv.clientWidth!==W){[c,W,H]=setupCanvas(cv)}if(W<10||H<10){raf=requestAnimationFrame(draw);return}
+  c.clearRect(0,0,W,H);
+  // ECG area bottom
+  const eh=H*.28,ey=H-eh/2-8;
+  trace.push(ecg(phase));if(trace.length>W/2)trace.shift();
+  c.strokeStyle="rgba(15,163,163,.12)";c.lineWidth=1;for(let x=0;x<W;x+=16){c.beginPath();c.moveTo(x,H-eh-12);c.lineTo(x,H);c.stroke()}
+  c.strokeStyle="#0FA3A3";c.lineWidth=2;c.beginPath();trace.forEach((v,i)=>{const x=W-trace.length*2+i*2;const y=ey+v*eh*.42;i?c.lineTo(x,y):c.moveTo(x,y)});c.stroke();
+  // circulation loop
+  const cx=W/2,cy=(H-eh)/2+4,rx=Math.min(W*.38,190),ry=Math.min((H-eh)*.36,95);
+  c.lineWidth=12;c.lineCap="round";
+  c.strokeStyle="rgba(43,108,176,.18)";c.beginPath();c.ellipse(cx,cy,rx,ry,0,Math.PI,2*Math.PI);c.stroke();
+  c.strokeStyle="rgba(200,40,60,.16)";c.beginPath();c.ellipse(cx,cy,rx,ry,0,0,Math.PI);c.stroke();
+  c.font="600 12px 'IBM Plex Sans Arabic'";c.textAlign="center";c.fillStyle="#2B6CB0";c.fillText("الرئتان: الدم يأخذ الأكسجين",cx,cy-ry-12);
+  c.fillStyle="#b02a3c";c.fillText("الجسم: الدم يوصل الأكسجين",cx,cy+ry+20);
+  parts.forEach((p,i)=>{const a=((p+phase*.25)%1)*2*Math.PI;const x=cx+rx*Math.cos(a),y=cy+ry*Math.sin(a);const up=Math.sin(a)<0;c.fillStyle=up?"#2B6CB0":"#c8283c";c.beginPath();c.arc(x,y,3.2,0,7);c.fill()});
+  // heart
+  const beat=ecg(phase)<-.5?1.16:1+Math.max(0,.06*Math.sin(phase*2*Math.PI));
+  c.save();c.translate(cx,cy);c.scale(beat,beat);const s=Math.min(rx,ry)*.42;
+  c.fillStyle="#c8283c";c.beginPath();c.moveTo(0,s*.9);c.bezierCurveTo(-s*1.4,s*.1,-s*.9,-s*.95,0,-s*.35);c.bezierCurveTo(s*.9,-s*.95,s*1.4,s*.1,0,s*.9);c.fill();
+  c.strokeStyle="rgba(255,255,255,.55)";c.lineWidth=2;c.beginPath();c.moveTo(0,-s*.3);c.lineTo(0,s*.75);c.stroke();
+  c.restore();
+  raf=requestAnimationFrame(draw)};
+ raf=requestAnimationFrame(draw);
+};
+
+/* --- Plates --- */
+SIMS.plates=function(){
+ const T={div:["تباعدي","تبتعد الصفيحتان فتصعد الصهارة وتتكوّن قشرة جديدة وأخدود وسلاسل جبال وسط المحيط.","البحر الأحمر يتسع ببطء بين الصفيحة العربية والصفيحة الإفريقية.","زلازل ضحلة وبراكين هادئة"],
+  con:["تقاربي","تقترب الصفيحتان فتغوص الأكثف تحت الأخرى، فتنشأ براكين وجبال وزلازل عميقة.","جبال زاغروس نتجت من تصادم الصفيحة العربية بالصفيحة الأوراسية.","زلازل قوية وعميقة وبراكين انفجارية"],
+  tr:["تحويلي","تنزلق الصفيحتان جانبيًا في اتجاهين متعاكسين، فتتراكم الطاقة ثم تتحرر فجأة.","صدع البحر الميت (خليج العقبة) حد تحويلي على أطراف الصفيحة العربية.","زلازل متكررة دون براكين"]};
+ stage(`<canvas id="pc"></canvas>`,
+ `<div class="sub">الأول: صفائح الأرض المتحركة · الثالث: الصفائح وعلاقتها بالزلازل والبراكين</div><h3>حدود الصفائح</h3><p>اختر نوع الحد وشغّل الحركة لترى ما يحدث في القشرة والستار.</p>
+ <div class="field"><label>نوع الحد</label><div class="seg" id="pSeg"><button data-t="div">تباعدي</button><button data-t="con">تقاربي</button><button data-t="tr">تحويلي</button></div></div>
+ <div class="field"><label>سرعة الحركة <output id="pO"></output></label><input type="range" id="pR" min="0" max="3" step="0.1" value="1"></div>
+ <div class="row-btns"><button class="btn line" id="pReset">أعد من البداية</button></div>
+ <div class="readout" style="margin-top:12px"><div><small>النتيجة</small><b id="pRes" style="font-size:15px"></b></div><div><small>مثال من منطقتنا</small><b id="pEx" style="font-size:14px;line-height:1.5"></b></div></div>
+ <div class="insight" id="pI"></div>`);
+ let type="div",sp=1,t=0,quakes=[];
+ const cv=$("#pc");let [c,W,H]=setupCanvas(cv);
+ const set=k=>{type=k;t=0;quakes=[];document.querySelectorAll("#pSeg button").forEach(b=>b.classList.toggle("on",b.dataset.t===k));$("#pRes").textContent=T[k][3];$("#pEx").textContent=T[k][2];$("#pI").textContent=T[k][1]};
+ document.querySelectorAll("#pSeg button").forEach(b=>b.onclick=()=>set(b.dataset.t));
+ $("#pR").oninput=e=>{sp=+e.target.value;$("#pO").textContent=ar(sp.toFixed(1)).replace(".","٫")+"×"};$("#pO").textContent="١٫٠×";
+ $("#pReset").onclick=()=>{t=0;quakes=[]};
+ set("div");
+ let last=performance.now();
+ const draw=now=>{const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt*sp;if(t>14)t=0;
+  if(cv.clientWidth!==W){[c,W,H]=setupCanvas(cv)}if(W<10||H<10){raf=requestAnimationFrame(draw);return}
+  c.clearRect(0,0,W,H);
+  const top=H*.32,crust=H*.13,mx=W/2;
+  if(type!=="tr"){
+   // sky / sea
+   c.fillStyle="#e8f4f8";c.fillRect(0,0,W,top);
+   // mantle
+   const g=c.createLinearGradient(0,top,0,H);g.addColorStop(0,"#f2b56b");g.addColorStop(1,"#c9562c");c.fillStyle=g;c.fillRect(0,top+crust,W,H);
+   // convection arrows
+   c.strokeStyle="rgba(255,255,255,.55)";c.lineWidth=2;
+   const ca=(x,dir)=>{const y0=top+crust+30,y1=H-26;c.beginPath();c.ellipse(x,(y0+y1)/2,W*.18,(y1-y0)/2,0,0,2*Math.PI);c.setLineDash([6,8]);c.lineDashOffset=-t*20*dir;c.stroke();c.setLineDash([])};
+   ca(W*.27,type==="div"?1:-1);ca(W*.73,type==="div"?-1:1);
+   const off=Math.min(t*7,W*.16);
+   if(type==="div"){
+    const gap=off;
+    // magma rising
+    c.fillStyle="#e2572b";c.beginPath();c.moveTo(mx-gap-4,top+crust);c.quadraticCurveTo(mx,top-6-gap*.15,mx+gap+4,top+crust);c.fill();
+    c.fillStyle="#ffb347";for(let i=0;i<6;i++){const yy=H-((t*40+i*30)%(H-top-crust));c.beginPath();c.arc(mx+Math.sin(i*2+t)*5,yy,3,0,7);c.fill()}
+    plate(0,mx-gap,top,crust,"#7a6a58","#9b8a73");plate(mx+gap,W,top,crust,"#7a6a58","#9b8a73");
+    arrow(mx-gap-60,top+crust/2,-1);arrow(mx+gap+60,top+crust/2,1);
+    label("قشرة جديدة",mx,top-14-gap*.15);
+   }else{
+    // subduction: right plate (oceanic) dives under left (continental)
+    const x0=mx+30-off;
+    c.fillStyle="#5b6b7f";c.beginPath();c.moveTo(x0,top);c.lineTo(W,top+4);c.lineTo(W,top+crust+4);c.lineTo(x0,top+crust);c.quadraticCurveTo(x0-60,top+crust+20,x0-150,H*.95);c.lineTo(x0-150+crust,H*.95);c.quadraticCurveTo(x0-40,top+crust-10,x0,top);c.fill();
+    plate(0,x0,top-6,crust+6,"#8a7a5e","#a48f6c");
+    // mountain + volcano
+    const vx=x0-W*.13,h=Math.min(18+off*.9,60);
+    c.fillStyle="#7a6a58";c.beginPath();c.moveTo(vx-50,top-6);c.lineTo(vx,top-6-h);c.lineTo(vx+50,top-6);c.fill();
+    if(off>20){c.fillStyle="#e2572b";c.beginPath();c.moveTo(vx-6,top-6-h);c.lineTo(vx+6,top-6-h);c.lineTo(vx,top-6-h-10-Math.sin(t*6)*4);c.fill();
+     c.fillStyle="rgba(90,90,90,.35)";for(let i=0;i<4;i++){c.beginPath();c.arc(vx+i*9+Math.sin(t+i)*4,top-h-20-i*12-((t*15)%12),8+i*2,0,7);c.fill()}
+     c.strokeStyle="#e2572b";c.lineWidth=3;c.beginPath();c.moveTo(vx,top-6-h);c.quadraticCurveTo(vx-20,top+crust+40,x0-110,H*.72);c.stroke()}
+    arrow(W-60,top+crust/2,-1);arrow(70,top+crust/2-3,1);
+    label("بركان وجبال",vx,top-h-34);label("صفيحة محيطية تغوص",x0+90,top+crust+24);
+    if(Math.random()<.04*sp)quakes.push({x:x0-30-Math.random()*80,y:top+crust+20+Math.random()*60,a:1});
+   }
+  }else{
+   // map view of transform fault
+   c.fillStyle="#d9cdb5";c.fillRect(0,0,W,H);
+   const off=Math.sin(t*.9)*0+ (t*14)%60;
+   const fx=W/2;
+   c.save();c.fillStyle="#cbbd9f";c.fillRect(0,0,fx,H);c.restore();
+   // roads/features shift
+   c.strokeStyle="#0B2545";c.lineWidth=5;
+   const stick=Math.floor(t*14/60)*60;
+   const shift=(t*14);
+   for(let k=-1;k<4;k++){const y=H*.15+k*H*.3;
+    c.beginPath();c.moveTo(20,y+ (shift%(H*.3)));c.lineTo(fx,y+(shift%(H*.3)));c.stroke();
+    c.beginPath();c.moveTo(fx,y-(shift%(H*.3)));c.lineTo(W-20,y-(shift%(H*.3)));c.stroke()}
+   c.strokeStyle="#b02a3c";c.lineWidth=3;c.setLineDash([10,6]);c.beginPath();c.moveTo(fx,0);c.lineTo(fx,H);c.stroke();c.setLineDash([]);
+   arrowV(fx*.5,H*.5,1);arrowV(fx*1.5,H*.5,-1);
+   label("الصدع",fx+30,22);
+   if(Math.random()<.05*sp)quakes.push({x:fx,y:Math.random()*H,a:1});
+  }
+  if(type==="div"&&Math.random()<.025*sp)quakes.push({x:mx+(Math.random()-.5)*30,y:top+crust*.5,a:1});
+  quakes.forEach(q=>{c.strokeStyle=`rgba(176,42,60,${q.a})`;c.lineWidth=2;for(let r=1;r<=3;r++){c.beginPath();c.arc(q.x,q.y,(1-q.a)*30*r/2+4,0,7);c.stroke()}q.a-=.02});
+  quakes=quakes.filter(q=>q.a>0);
+  raf=requestAnimationFrame(draw)};
+ function plate(x1,x2,y,h,c1,c2){if(x2<=x1)return;c.fillStyle=c1;c.fillRect(x1,y,x2-x1,h);c.fillStyle=c2;c.fillRect(x1,y,x2-x1,h*.35)}
+ function arrow(x,y,d){c.fillStyle="#fff";c.strokeStyle="#0B2545";c.lineWidth=2;c.beginPath();c.moveTo(x-22*d,y);c.lineTo(x+14*d,y);c.stroke();c.beginPath();c.moveTo(x+22*d,y);c.lineTo(x+10*d,y-7);c.lineTo(x+10*d,y+7);c.closePath();c.fillStyle="#0B2545";c.fill()}
+ function arrowV(x,y,d){c.strokeStyle="#0B2545";c.lineWidth=3;c.beginPath();c.moveTo(x,y-30*d);c.lineTo(x,y+22*d);c.stroke();c.fillStyle="#0B2545";c.beginPath();c.moveTo(x,y+32*d);c.lineTo(x-8,y+18*d);c.lineTo(x+8,y+18*d);c.fill()}
+ function label(s,x,y){c.font="600 13px 'IBM Plex Sans Arabic'";c.textAlign="center";const w=c.measureText(s).width+14;c.fillStyle="rgba(255,255,255,.9)";c.fillRect(x-w/2,y-15,w,21);c.fillStyle="#0B2545";c.fillText(s,x,y)}
+ raf=requestAnimationFrame(draw);
+};
+
+/* --- Seismograph --- */
+SIMS.seismo=function(){
+ stage(`<canvas id="sc"></canvas>`,
+ `<div class="sub">الصف الثالث · الزلازل</div><h3>جهاز رصد الزلازل</h3><p>تصل الموجة الأولية (P) قبل الثانوية (S)؛ والفرق بين وصولهما يحدد بعد المركز السطحي عن المحطة.</p>
+ <div class="field"><label>قوة الزلزال (مقياس ريختر) <output id="mO"></output></label><input type="range" id="mR" min="2" max="8" step="0.5" value="5"></div>
+ <div class="field"><label>بعد المحطة عن المركز <output id="dO"></output></label><input type="range" id="dR" min="40" max="600" step="10" value="200"></div>
+ <div class="row-btns"><button class="btn pri" id="sGo">ابدأ الزلزال</button></div>
+ <div class="readout" style="margin-top:12px"><div><small>وصول P بعد</small><b id="sP"></b></div><div><small>وصول S بعد</small><b id="sS"></b></div><div><small>الفرق (S − P)</small><b id="sD"></b></div><div><small>الطاقة مقارنة بزلزال ٤</small><b id="sE"></b></div></div>
+ <div class="insight">قاعدة تقريبية: كل ثانية فرق بين وصول الموجتين ≈ ٨ كم تقريبًا من المحطة. وكل درجة على مقياس ريختر تعني طاقة أكبر بنحو ٣٢ مرة.</div>`);
+ const vp=6,vs=3.5;let M=5,D=200,t0=null,now0=0;
+ const cv=$("#sc");let [c,W,H]=setupCanvas(cv);
+ const fmt=v=>ar(v.toFixed(1)).replace(".","٫");
+ const upd=()=>{M=+$("#mR").value;D=+$("#dR").value;$("#mO").textContent=fmt(M);$("#dO").textContent=ar(D)+" كم";
+  $("#sP").textContent=fmt(D/vp)+" ث";$("#sS").textContent=fmt(D/vs)+" ث";$("#sD").textContent=fmt(D/vs-D/vp)+" ث";
+  const e=Math.pow(10,1.5*(M-4));$("#sE").textContent=e<1?"أضعف بـ "+ar(Math.round(1/e))+" مرة":e<1.5?"مساوية":"أقوى بـ "+ar(Math.round(e).toLocaleString("en")).replace(/,/g,"٬")+" مرة"};
+ $("#mR").oninput=upd;$("#dR").oninput=upd;upd();
+ $("#sGo").onclick=()=>{t0=performance.now()};
+ const span=Math.max(30,600/vs+20); // seconds shown
+ const amp=(tt)=>{if(t0===null)return 0;const tp=D/vp,ts=D/vs;const A=Math.min(1,Math.pow(10,(M-2)/6)/Math.pow(10,1))*Math.pow(150/(D+50),.5);let y=0;
+   if(tt>tp)y+=.35*A*Math.exp(-(tt-tp)/6)*Math.sin(tt*14)+.1*A*Math.sin(tt*31)*Math.exp(-(tt-tp)/4);
+   if(tt>ts)y+=1*A*Math.exp(-(tt-ts)/(4+M))*Math.sin(tt*7.3+1)*Math.min(1,(tt-ts)*2);
+   return Math.max(-1.1,Math.min(1.1,y))};
+ const draw=now=>{if(cv.clientWidth!==W){[c,W,H]=setupCanvas(cv)}if(W<10||H<10){raf=requestAnimationFrame(draw);return}
+  c.clearRect(0,0,W,H);
+  const pad=26,mid=H/2,secs=Math.min(span,Math.max(40,D/vs+25));
+  c.strokeStyle="rgba(15,163,163,.14)";c.lineWidth=1;
+  for(let s=0;s<=secs;s+=5){const x=W-pad-(s/secs)*(W-2*pad);c.beginPath();c.moveTo(x,pad);c.lineTo(x,H-pad);c.stroke();if(s%10===0){c.fillStyle="#5B6B7F";c.font="11px 'IBM Plex Sans Arabic'";c.textAlign="center";c.fillText(ar(s)+" ث",x,H-8)}}
+  c.strokeStyle="#c9d5e1";c.beginPath();c.moveTo(pad,mid);c.lineTo(W-pad,mid);c.stroke();
+  const el=t0===null?0:(now-t0)/1000*Math.max(3,secs/12);
+  const shown=Math.min(el,secs);
+  c.strokeStyle="#0B2545";c.lineWidth=1.6;c.beginPath();
+  const N=Math.floor((W-2*pad));
+  for(let i=0;i<=N;i++){const tt=i/N*secs;if(tt>shown)break;const x=W-pad-i;const y=mid-amp(tt)*(H/2-pad-6);i?c.lineTo(x,y):c.moveTo(x,y)}
+  c.stroke();
+  // markers
+  const mark=(tt,txt,col)=>{if(t0===null||tt>shown)return;const x=W-pad-tt/secs*(W-2*pad);c.strokeStyle=col;c.setLineDash([4,4]);c.beginPath();c.moveTo(x,pad);c.lineTo(x,H-pad);c.stroke();c.setLineDash([]);c.fillStyle=col;c.font="600 13px 'IBM Plex Sans Arabic'";c.textAlign="center";c.fillText(txt,x,pad-6+14)};
+  mark(D/vp,"P","#2B6CB0");mark(D/vs,"S","#b02a3c");
+  if(t0===null){c.fillStyle="#5B6B7F";c.font="15px 'IBM Plex Sans Arabic'";c.textAlign="center";c.fillText("اضبط القوة والبعد ثم اضغط «ابدأ الزلزال»",W/2,mid-20)}
+  // pen
+  if(t0!==null&&shown<secs){const x=W-pad-shown/secs*(W-2*pad);c.fillStyle="#b02a3c";c.beginPath();c.arc(x,mid-amp(shown)*(H/2-pad-6),4,0,7);c.fill()}
+  raf=requestAnimationFrame(draw)};
+ raf=requestAnimationFrame(draw);
+};
+
+/* --- Punnett --- */
+SIMS.punnett=function(){
+ const TR={
+  h:{n:"طول نبات البازلاء",D:"T",r:"t",dom:"طويل",rec:"قصير",cd:"#2E9D5B",cr:"#a6d8b8"},
+  c:{n:"لون بذور البازلاء",D:"Y",r:"y",dom:"أصفر",rec:"أخضر",cd:"#e0b420",cr:"#5aa34a"},
+  s:{n:"شكل بذور البازلاء",D:"R",r:"r",dom:"ملساء",rec:"مجعدة",cd:"#8a7a5e",cr:"#c9b48f"}};
+ stage(`<div class="punnett" id="pg"></div>`,
+ `<div class="sub">الصف الثالث · علم الوراثة</div><h3>مربع بانيت</h3><p>اختر الصفة والطرز الجينية للأبوين، ثم ازرع ١٠٠ نبتة وقارن النتائج الفعلية بالمتوقعة.</p>
+ <div class="field"><label>الصفة</label><select id="uT">${Object.entries(TR).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join("")}</select></div>
+ <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div><label>الأب</label><select id="u1"></select></div><div><label>الأم</label><select id="u2"></select></div></div>
+ <div class="bars" id="uB"></div>
+ <div class="row-btns" style="margin-top:10px"><button class="btn pri" id="uGo">ازرع ١٠٠ نبتة</button></div>
+ <div class="insight" id="uI"></div>`);
+ let tr=TR.h;
+ const fill=()=>{const o=[tr.D+tr.D,tr.D+tr.r,tr.r+tr.r];["#u1","#u2"].forEach((s,i)=>{const v=$(s).selectedIndex>=0?$(s).selectedIndex:1;$(s).innerHTML=o.map(g=>`<option>${g} (${g.includes(tr.D)?tr.dom:tr.rec})</option>`).join("");$(s).selectedIndex=v})};
+ const gen=s=>[tr.D+tr.D,tr.D+tr.r,tr.r+tr.r][$(s).selectedIndex];
+ const calc=()=>{const a=gen("#u1"),b=gen("#u2");const cells=[];for(const x of b)for(const y of a){cells.push([y,x].sort((p,q)=>p===tr.D?-1:1).join(""))}return{a,b,cells}};
+ const render=(obs)=>{const {a,b,cells}=calc();
+  $("#pg").innerHTML=`<div></div><div class="hd">${a[0]}</div><div class="hd">${a[1]}</div>`+
+   [0,1].map(r=>`<div class="hd">${b[r]}</div>`+[0,1].map(cc=>{const g=cells[r*2+cc];const d=g.includes(tr.D);return `<div class="cell"><span class="dot" style="background:${d?tr.cd:tr.cr}"></span>${g}<small>${d?tr.dom:tr.rec}</small></div>`}).join("")).join("");
+  const dom=cells.filter(g=>g.includes(tr.D)).length;
+  const exp=[[tr.dom,dom*25],[tr.rec,(4-dom)*25]];
+  $("#uB").innerHTML=exp.map(([n,v],i)=>`<div class="bar"><span>${n} متوقع</span><i style="width:${v*1.4}px;background:${i?tr.cr:tr.cd}"></i><b>${ar(v)}٪</b></div>`+(obs?`<div class="bar"><span>${n} فعلي</span><i style="width:${obs[i]*1.4}px;background:${i?tr.cr:tr.cd};opacity:.6"></i><b>${ar(obs[i])}٪</b></div>`:"")).join("");
+  const gt={};cells.forEach(g=>gt[g]=(gt[g]||0)+1);
+  $("#uI").innerHTML=`الطرز الجينية المتوقعة: ${Object.entries(gt).map(([g,n])=>`${g} ${ar(n*25)}٪`).join(" · ")}`+(obs?`<br>الفرق بين الفعلي والمتوقع سببه الصدفة؛ يقل كلما زاد عدد النباتات.`:"");
+ };
+ $("#uT").onchange=e=>{tr=TR[e.target.value];fill();render()};
+ $("#u1").onchange=()=>render();$("#u2").onchange=()=>render();
+ $("#uGo").onclick=()=>{const {cells}=calc();let d=0;for(let i=0;i<100;i++){if(cells[Math.floor(Math.random()*4)].includes(tr.D))d++}render([d,100-d])};
+ fill();$("#u1").selectedIndex=1;$("#u2").selectedIndex=1;render();
+};
+
+/* ================= HERO CANVAS ================= */
+(function(){
+ const cv=$("#heroCanvas"),reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+ let c,W,H,nodes=[],atoms=[],labels=[];
+ const LBL=["H₂O","CO₂","NaCl","DNA","F = m × a","ρ = m ÷ V","pH ٧","O₂","C₆H₁₂O₆","Fe","Aa × Aa","٦ كم/ث"];
+ function init(){[c,W,H]=setupCanvas(cv);const n=Math.round(W*H/16000);nodes=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.8+1}));
+  atoms=[{x:W*.16,y:H*.6,R:Math.min(70,W*.08)},{x:W*.06,y:H*.9,R:Math.min(44,W*.05)},{x:W*.9,y:H*.75,R:Math.min(56,W*.06)}];
+  labels=LBL.map((s,i)=>({s,x:Math.random()*W,y:Math.random()*H,v:.12+Math.random()*.15,o:.12+Math.random()*.14}))}
+ let t=0;
+ function frame(){t+=.01;c.clearRect(0,0,W,H);
+  nodes.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1});
+  for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<110){c.strokeStyle=`rgba(95,212,200,${(1-d/110)*.22})`;c.lineWidth=1;c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke()}}
+  nodes.forEach(p=>{c.fillStyle="rgba(159,227,227,.55)";c.beginPath();c.arc(p.x,p.y,p.r,0,7);c.fill()});
+  atoms.forEach((a,k)=>{c.strokeStyle="rgba(159,227,227,.22)";c.lineWidth=1.2;for(let i=0;i<3;i++){c.save();c.translate(a.x,a.y);c.rotate(i*Math.PI/3+k);c.beginPath();c.ellipse(0,0,a.R,a.R*.36,0,0,7);c.stroke();const an=t*(1.4+i*.3)*(k%2?-1:1)+i;c.fillStyle="rgba(95,212,200,.85)";c.beginPath();c.arc(a.R*Math.cos(an),a.R*.36*Math.sin(an),3,0,7);c.fill();c.restore()}
+   c.fillStyle="rgba(255,179,71,.7)";c.beginPath();c.arc(a.x,a.y,5,0,7);c.fill()});
+  // DNA helix on right edge
+  const hx=W*.95;if(W>700)for(let y=0;y<H;y+=14){const ph=y*.04+t*2,dx=Math.sin(ph)*18;c.fillStyle="rgba(95,212,200,.35)";c.beginPath();c.arc(hx+dx,y,2.2,0,7);c.fill();c.fillStyle="rgba(120,170,255,.35)";c.beginPath();c.arc(hx-dx,y,2.2,0,7);c.fill();if(y%28===0){c.strokeStyle="rgba(255,255,255,.08)";c.beginPath();c.moveTo(hx+dx,y);c.lineTo(hx-dx,y);c.stroke()}}
+  c.font="500 15px 'IBM Plex Sans Arabic'";labels.forEach(l=>{l.y-=l.v;if(l.y<-20){l.y=H+20;l.x=Math.random()*W}c.fillStyle=`rgba(200,230,240,${l.o})`;c.fillText(l.s,l.x,l.y)});
+  if(!reduce)requestAnimationFrame(frame)}
+ init();frame();let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{init();if(reduce)frame()},200)});
+})();
+
+/* about page */
+const TEAM=["فؤاد مرسي","محمد بامخير","خالد الشريف"];
+const initial=n=>{const w=n.replace("عبد ","عبد").split(" ");return w[0][0]+"."+w[w.length-1].replace(/^ال/,"")[0]};
+$("#team").innerHTML=TEAM.map(n=>`<div class="tcard"><span class="mono">${initial(n)}</span><b>الأستاذ ${n}</b></div>`).join("")+`<div class="tcard tall"><b>ومعلمو العلوم في المدرسة</b></div>`;
+
+$("#prMono").textContent="و.ع";
+function route(){const a=location.hash==="#about";document.body.classList.toggle("about-view",a);if(a)scrollTo(0,0);else{dispatchEvent(new Event("resize"));const el=location.hash&&document.getElementById(location.hash.slice(1));if(el)setTimeout(()=>el.scrollIntoView({behavior:"instant"}),30)}document.querySelector('nav.top a[href="#about"]').classList.toggle("on",a)}
+addEventListener("hashchange",route);route();
+
+/* app: tab bar, install, offline */
+function markTab(){let cur="home";if(document.body.classList.contains("about-view"))cur="about";else ["lab","sims","stem"].forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<200)cur=id});document.querySelectorAll(".tabbar a").forEach(a=>a.classList.toggle("on",a.dataset.t===cur))}
+addEventListener("scroll",markTab,{passive:true});addEventListener("hashchange",()=>setTimeout(markTab,60));markTab();
+(function(){
+ const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
+ const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+ const btn=$("#installBtn");let deferred=null;
+ addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;if(!standalone)btn.classList.add("show")});
+ const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+ if(ios&&!standalone&&!inFrame&&location.protocol.startsWith("http"))btn.classList.add("show");
+ btn.onclick=async()=>{if(deferred){deferred.prompt();try{await deferred.userChoice}catch(e){}deferred=null;btn.classList.remove("show")}else $("#iosHint").classList.add("show")};
+ $("#iosX").onclick=()=>$("#iosHint").classList.remove("show");
+ addEventListener("appinstalled",()=>{btn.classList.remove("show");toast("تم تثبيت التطبيق")});
+ if(!inFrame&&location.protocol.startsWith("http")&&"serviceWorker" in navigator){try{navigator.serviceWorker.register("sw.js").catch(()=>{})}catch(e){}}
+})();
+
+/* nav highlight */
+const secs=["lab","sims","stem","guide"];
+addEventListener("scroll",()=>{if(document.body.classList.contains("about-view"))return;let cur="";secs.forEach(id=>{const el=document.getElementById(id);if(el.getBoundingClientRect().top<120)cur=id});document.querySelectorAll("nav.top .links a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur))},{passive:true});
+
+renderGrades();renderUnits();renderCycle();renderStem();showSim("plates");
+</script>
+</body>
+</html>
